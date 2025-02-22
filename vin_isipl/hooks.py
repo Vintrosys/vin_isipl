@@ -74,10 +74,7 @@ app_license = "mit"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "vin_isipl.utils.jinja_methods",
-# 	"filters": "vin_isipl.utils.jinja_filters"
-# }
+jinja = {"methods": "vin_isipl.utils.jinja"}
 
 # Installation
 # ------------
