@@ -80,12 +80,12 @@ jinja = {"methods": "vin_isipl.utils.jinja"}
 # ------------
 
 # before_install = "vin_isipl.install.before_install"
-# after_install = "vin_isipl.install.after_install"
+after_install = "vin_isipl.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "vin_isipl.uninstall.before_uninstall"
+before_uninstall = "vin_isipl.uninstall.before_uninstall"
 # after_uninstall = "vin_isipl.uninstall.after_uninstall"
 
 # Integration Setup

@@ -37,8 +37,8 @@ def get_company_contact(company, fields=["*"]):
 		return get_contact(contact, fields=fields)
 
 
-def get_company_logo(company):
-	return frappe.db.get_value("Company", company, "custom_logo")
+def get_company_logo(company, logo_field="company_logo"):
+	return frappe.db.get_value("Company", company, logo_field)
 
 
 def format_value(*args, **kwargs):
