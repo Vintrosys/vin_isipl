@@ -31,8 +31,8 @@ def get_contact(contact, fields=["*"]):
 	return frappe.get_all("Contact", filters={"name": contact}, fields=fields)[0]
 
 
-def get_company_contact(company, fields=["*"]):
-	contact = get_default_contact("Company", company)
+def get_default_contact_detail(doctype, docname, fields=["*"]):
+	contact = get_default_contact(doctype, docname)
 	if contact:
 		return get_contact(contact, fields=fields)
 
@@ -48,6 +48,16 @@ def format_value(*args, **kwargs):
 def get_document(doctype, name):
 	if doctype and name:
 		return frappe.get_doc(doctype, name)
+
+
+def get_document_amended_from_id(doctype, name):
+	def get_amended_from(_name):
+		p = frappe.db.get_value(doctype, _name, "amended_from")
+		if not p:
+			return _name
+		return get_amended_from(p)
+
+	return get_amended_from(name)
 
 
 def get_customer_total_outstanding(customer):
