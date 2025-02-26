@@ -74,21 +74,18 @@ app_license = "mit"
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "vin_isipl.utils.jinja_methods",
-# 	"filters": "vin_isipl.utils.jinja_filters"
-# }
+jinja = {"methods": "vin_isipl.utils.jinja"}
 
 # Installation
 # ------------
 
 # before_install = "vin_isipl.install.before_install"
-# after_install = "vin_isipl.install.after_install"
+after_install = "vin_isipl.install.after_install"
 
 # Uninstallation
 # ------------
 
-# before_uninstall = "vin_isipl.uninstall.before_uninstall"
+before_uninstall = "vin_isipl.uninstall.before_uninstall"
 # after_uninstall = "vin_isipl.uninstall.after_uninstall"
 
 # Integration Setup
