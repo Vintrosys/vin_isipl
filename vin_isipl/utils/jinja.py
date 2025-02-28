@@ -2,6 +2,7 @@ from phonenumbers import PhoneNumberFormat, format_number, is_valid_number, pars
 from frappe.utils.formatters import format_value as _format_value
 from erpnext.accounts.party import get_dashboard_info, get_default_contact
 from erpnext.controllers.taxes_and_totals import get_itemised_tax_breakup_data
+from frappe.model.base_document import _filter
 import frappe
 
 
@@ -146,3 +147,40 @@ def get_gst_rate_wise_details(sales_invoice_doc):
 		"is_igst": is_igst,
 		"gst_breakup": sorted(list(tax_rate_wise_details.values()), key=lambda x: x.tax_rate)
 	})
+
+def get_sales_invoice_serial_no_list(doc):
+	serial_no_list = []
+	idx = 0
+
+	serial_batch_bundle_list = [d.serial_and_batch_bundle for d in doc.items if d.serial_and_batch_bundle]
+	if not serial_batch_bundle_list:
+		return []
+	
+	serial_list = frappe.get_all("Serial and Batch Entry", filters={
+		"docstatus": 1,
+		"parent": ["in", serial_batch_bundle_list]
+	}, fields=["serial_no", "parent"], order_by="creation asc, idx asc")
+
+
+	def get_dict(serial_no, _idx):
+		return frappe._dict({
+			"idx": _idx,
+			"item_code": item.item_code,
+			"item_name": item.item_name,
+			"serial_no": serial_no
+		})
+	
+	for item in doc.items:
+		if not item.serial_and_batch_bundle:
+			continue
+
+		row_serial_no_list = _filter(serial_list, {
+			"parent": item.serial_and_batch_bundle
+		})
+
+		for serial_no in row_serial_no_list:
+			idx += 1
+			serial_no_list.append(get_dict(serial_no.serial_no, idx))
+
+
+	return serial_no_list
