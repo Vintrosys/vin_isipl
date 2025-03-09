@@ -76,6 +76,9 @@ app_license = "mit"
 # add methods and filters to jinja environment
 jinja = {"methods": "vin_isipl.utils.jinja"}
 
+# Print Format - PDF
+pdf_footer_html = "vin_isipl.utils.pdf.pdf_footer_html"
+
 # Installation
 # ------------
 
