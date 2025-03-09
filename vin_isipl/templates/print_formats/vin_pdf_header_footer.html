@@ -54,7 +54,7 @@
                 // used to set page no for commercial invoice with multiple invoice headings (original, duplicate, triplicate)
                 var footerEle = document.getElementsByClassName("footer");
 
-				if (footerEle && parseInt(footerEle[0].getAttribute("total_count_of_invoice_headings"))) {
+				if (footerEle && footerEle.length && parseInt(footerEle[0].getAttribute("total_count_of_invoice_headings"))) {
 					var total_count_of_invoice_headings = footerEle[0].getAttribute("total_count_of_invoice_headings");
 					var total_pages = parseInt(vars["topage"]);
 					var pages_per_invoice_heading = total_pages / parseInt(total_count_of_invoice_headings);
