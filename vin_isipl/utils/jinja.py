@@ -148,6 +148,7 @@ def get_gst_rate_wise_details(sales_invoice_doc):
 		"gst_breakup": sorted(list(tax_rate_wise_details.values()), key=lambda x: x.tax_rate)
 	})
 
+
 def get_sales_invoice_serial_no_list(doc):
 	serial_no_list = []
 	idx = 0
@@ -184,3 +185,19 @@ def get_sales_invoice_serial_no_list(doc):
 
 
 	return serial_no_list
+
+
+def extract_numeric_suffix(docname):
+	"""
+	Extracts and returns the numeric suffix from the provided docname.
+	"""
+	res = ""
+
+	if docname:
+		for char in docname[::-1]:
+			if char.isdigit():
+				res = char + res
+			else:
+				break
+
+	return res
