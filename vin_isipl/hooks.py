@@ -245,3 +245,7 @@ before_uninstall = "vin_isipl.uninstall.before_uninstall"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+doctype_js = {
+    "Item" : "public/js/item.js"
+    }
+
