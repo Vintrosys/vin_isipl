@@ -249,3 +249,6 @@ doctype_js = {
     "Item" : "public/js/item.js"
     }
 
+fixtures = [
+    {"dt": "Insights Workbook"}
+]
