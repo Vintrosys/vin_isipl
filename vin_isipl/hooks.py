@@ -246,6 +246,13 @@ before_uninstall = "vin_isipl.uninstall.before_uninstall"
 # }
 
 doctype_js = {
-    "Item" : "public/js/item.js"
+    "Item" : "public/js/item.js",
+    "Quotation" : "public/js/proforma_invoice.js"
     }
+
+fixtures = [
+    {"dt": "Insights Workbook"}
+]
+
+
 
