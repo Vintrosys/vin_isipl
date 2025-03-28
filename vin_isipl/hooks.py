@@ -251,7 +251,9 @@ doctype_js = {
     }
 
 fixtures = [
-    {"dt": "Insights Workbook"}
+    {"dt": "Insights Workbook"},
+    {"dt": "DocType", "filters": [["name", "in", ["PI Version Tracker"]]]}
+
 ]
 
 
