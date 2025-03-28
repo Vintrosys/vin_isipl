@@ -551,7 +551,7 @@
    "field_name": null,
    "idx": 0,
    "is_system_generated": 1,
-   "modified": "2025-03-07 09:42:37.811929",
+   "modified": "2025-03-28 11:02:37.001898",
    "modified_by": "Administrator",
    "module": null,
    "name": "Payment Entry-main-track_changes",
@@ -574,7 +574,7 @@
    "field_name": "naming_series",
    "idx": 0,
    "is_system_generated": 0,
-   "modified": "2025-03-23 16:30:05.666200",
+   "modified": "2025-03-28 11:33:55.858849",
    "modified_by": "Administrator",
    "module": "Vin Isipl",
    "name": "Payment Entry-naming_series-options",
@@ -582,7 +582,7 @@
    "property": "options",
    "property_type": "Small Text",
    "row_name": null,
-   "value": "ISIPL/R/.FY.####\nISIPL/P/.FY.####\nINN/R/.FY.####\nINN/P/.FY.####"
+   "value": "ISIPL/R/.FY.####\nISIPL/P/.FY.####\nISIPL/I/.FY.####\nINN/R/.FY.####\nINN/P/.FY.####\nINN/I/.FY.####"
   }
  ],
  "sync_on_migrate": 1
