@@ -254,5 +254,3 @@ fixtures = [
     {"dt": "Insights Workbook"}
 ]
 
-
-
