@@ -253,4 +253,3 @@ doctype_js = {
 fixtures = [
     {"dt": "Insights Workbook"}
 ]
-
