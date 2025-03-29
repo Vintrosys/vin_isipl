@@ -247,7 +247,8 @@ before_uninstall = "vin_isipl.uninstall.before_uninstall"
 
 doctype_js = {
     "Item" : "public/js/item.js",
-    "Quotation" : "public/js/proforma_invoice.js"
+    "Quotation" : "public/js/proforma_invoice.js",
+    "Sales Invoice" : "public/js/sales_invoice.js"
     }
 
 fixtures = [
