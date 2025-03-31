@@ -248,7 +248,14 @@ before_uninstall = "vin_isipl.uninstall.before_uninstall"
 doctype_js = {
     "Item" : "public/js/item.js",
     "Quotation" : "public/js/proforma_invoice.js",
-    "Sales Invoice" : "public/js/sales_invoice.js"
+    "Sales Invoice" : "public/js/sales_invoice.js",
+    "Payment Entry": "public/js/payment_entry.js",
+    "Journal Entry": "public/js/journal_entry.js",
+    "Purchase Order": "public/js/purchase_order.js",
+    "Purchase Receipt": "public/js/purchase_receipt.js",
+    "Purchase Invoice": "public/js/purchase_invoice.js",
+    "Delivery Note": "public/js/delivery_note.js",
+    "Stock Entry": "public/js/stock_entry.js"
     }
 
 fixtures = [
