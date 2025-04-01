@@ -5,6 +5,7 @@ frappe.ui.form.on('Quotation', {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
         }, 5);
 
+        frm.trigger('set_party_name'); 
 
         if (!frm.is_new()) {           
             frm.add_custom_button('Save PDF', function () {
@@ -21,6 +22,10 @@ frappe.ui.form.on('Quotation', {
                 });
             });
         }        
+    },
+
+    party_name: function (frm) {
+        frm.trigger('set_party_name');  
     },
 
     order_type: function (frm) {
@@ -49,7 +54,7 @@ frappe.ui.form.on('Quotation', {
         }
     },  
 
-    party_name: function (frm) {
+    set_party_name: function (frm) {
         if (frm.doc.party_name) {
             frappe.db.get_value('CRM Deal', { organization: frm.doc.party_name }, 'deal_owner')
                 .then(r => {
