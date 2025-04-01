@@ -66,7 +66,6 @@ frappe.ui.form.on('Quotation', {
 });
 
 function fetch_sales_person(frm, deal_owner) {    
-    ee
     frappe.db.get_value('Employee', { user_id: deal_owner }, 'name')
         .then(emp => {
             if (emp.message && emp.message.name) {               
