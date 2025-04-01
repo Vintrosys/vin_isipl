@@ -140,13 +140,11 @@ before_uninstall = "vin_isipl.uninstall.before_uninstall"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Customer": {
+		"after_insert":"vin_isipl.utils.isipl_crm.create_org"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
