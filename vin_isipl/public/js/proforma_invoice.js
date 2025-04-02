@@ -1,10 +1,9 @@
 frappe.ui.form.on('Quotation', {
+    
     refresh: function (frm) {
         setTimeout(() => {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
         }, 5);
-
-        
 
         if (!frm.is_new()) {           
             frm.add_custom_button('Save PDF', function () {
@@ -22,6 +21,7 @@ frappe.ui.form.on('Quotation', {
             });
         }        
     },
+
 
     onload: function (frm) {
         frm.trigger('set_party_name'); 
@@ -74,6 +74,7 @@ frappe.ui.form.on('Quotation', {
             if (!frm.doc.sales_person) {
                 frm.set_value('sales_person', '');
             }
+
         }
     }
 });

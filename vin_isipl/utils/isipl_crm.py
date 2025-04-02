@@ -39,3 +39,12 @@ def get_customer_link(crm_deal):
 		if not customer:
 			customer = org
 		return get_url_to_form("Customer", customer) if customer else ""
+	
+
+@frappe.whitelist()
+def create_org(doc,action):
+	if not frappe.db.exists("CRM Organization", doc.name):
+		org = frappe.new_doc("CRM Organization")
+		org.organization_name = doc.name
+		org.insert()
+		frappe.db.commit()
