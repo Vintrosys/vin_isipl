@@ -2,10 +2,7 @@ frappe.ui.form.on('Sales Invoice', {
     
     onload: function (frm) {        
         frm.trigger('set_naming_series');  
-    },
-
-    refresh: function (frm) {         
-        frm.trigger('set_sales_person');  
+        frm.trigger('set_sales_person'); 
     },
 
     custom_invoice_type: function (frm) {
@@ -19,8 +16,9 @@ frappe.ui.form.on('Sales Invoice', {
     is_return: function (frm) {
         frm.trigger('set_naming_series');
     },
-
+    
     customer: function (frm) {
+        frm.set_value('custom_sales_person', '');
         frm.trigger('set_sales_person');  
     },
 
@@ -65,11 +63,15 @@ frappe.ui.form.on('Sales Invoice', {
                     if (r.message && r.message.deal_owner) {
                         fetch_sales_person(frm, r.message.deal_owner);
                     } else {
-                        frm.set_value('custom_sales_person', '');
+                        if (!frm.doc.custom_sales_person) {
+                            frm.set_value('custom_sales_person', '');
+                        }
                     }
                 });
         } else {
-            frm.set_value('custom_sales_person', '');  
+            if (!frm.doc.custom_sales_person) {
+                frm.set_value('custom_sales_person', '');
+            } 
         }
     }     
 })
@@ -80,10 +82,15 @@ function fetch_sales_person(frm, deal_owner) {
             if (emp.message && emp.message.name) {               
                 frappe.db.get_value('Sales Person', { employee: emp.message.name }, 'name')
                     .then(sp => {
-                        frm.set_value('custom_sales_person', sp.message.name);
+                        if (!frm.doc.custom_sales_person) {
+                            frm.set_value('custom_sales_person', sp.message.name);
+                        }    
+
                     });
             } else {
-                frm.set_value('custom_sales_person', '');
+                if (!frm.doc.custom_sales_person) {
+                    frm.set_value('custom_sales_person', '');
+                }
             }
         });
 }

@@ -5,8 +5,6 @@ frappe.ui.form.on('Quotation', {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
         }, 5);
 
-        frm.trigger('set_party_name'); 
-
         if (!frm.is_new()) {           
             frm.add_custom_button('Save PDF', function () {
                 frappe.call({
@@ -24,7 +22,13 @@ frappe.ui.form.on('Quotation', {
         }        
     },
 
+
+    onload: function (frm) {
+        frm.trigger('set_party_name'); 
+    },
+
     party_name: function (frm) {
+        frm.set_value('sales_person', '');
         frm.trigger('set_party_name');  
     },
 
@@ -61,11 +65,16 @@ frappe.ui.form.on('Quotation', {
                     if (r.message && r.message.deal_owner) {
                         fetch_sales_person(frm, r.message.deal_owner);
                     } else {
-                        frm.set_value('sales_person', '');
+                        if (!frm.doc.sales_person) {
+                            frm.set_value('sales_person', '');
+                        }
                     }
                 });
         } else {
-            frm.set_value('sales_person', '');
+            if (!frm.doc.sales_person) {
+                frm.set_value('sales_person', '');
+            }
+
         }
     }
 });
@@ -76,12 +85,15 @@ function fetch_sales_person(frm, deal_owner) {
             if (emp.message && emp.message.name) {               
                 frappe.db.get_value('Sales Person', { employee: emp.message.name }, 'name')
                     .then(sp => {
-                        frm.set_value('sales_person', sp.message.name);
+                        if (!frm.doc.sales_person) {
+                            frm.set_value('sales_person', sp.message.name);
+                        }
                     });
             } else {
-                frm.set_value('sales_person', '');
+                if (!frm.doc.sales_person) {
+                    frm.set_value('sales_person', '');
+                }
             }
-            frm.refresh_field('sales_person');
         });
 }
 
