@@ -226,5 +226,89 @@
     "share_link": null,
     "title": "Stock Dashboard",
     "workbook": "4"
+   },
+   {
+    "docstatus": 0,
+    "doctype": "Insights Dashboard v3",
+    "is_public": 0,
+    "is_shared_with_organization": false,
+    "items": "[\n {\n  \"chart\": \"a14bo8tfqh\",\n  \"layout\": {\n   \"h\": 2,\n   \"i\": \"je7uti5o\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 6,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"c90b678pde\",\n  \"layout\": {\n   \"h\": 2,\n   \"i\": \"9cvtqoxt\",\n   \"moved\": false,\n   \"w\": 3,\n   \"x\": 17,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"lsr47noeia\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"68vohxf8\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 0,\n   \"y\": 2\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"v9p5od10gd\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"b55mkhpw\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 10,\n   \"y\": 2\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"nm9l7vh8ck\",\n  \"layout\": {\n   \"h\": 2,\n   \"i\": \"6y48uzrp\",\n   \"moved\": false,\n   \"w\": 3,\n   \"x\": 10,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"p0mllvh99e\",\n  \"layout\": {\n   \"h\": 2,\n   \"i\": \"c6lls11b\",\n   \"moved\": false,\n   \"w\": 4,\n   \"x\": 0,\n   \"y\": 0\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"tmrlr0vgq2\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"c4zy9w4k\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 10\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"7ihpp7ndd8\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"5yg5kqit\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 13\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"6agplub90k\",\n  \"layout\": {\n   \"h\": 3,\n   \"i\": \"aqh40w47\",\n   \"moved\": false,\n   \"w\": 20,\n   \"x\": 0,\n   \"y\": 16\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"f6fj2o866n\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"72n0p5y6\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 0,\n   \"y\": 19\n  },\n  \"type\": \"chart\"\n },\n {\n  \"chart\": \"gs5e33qfk8\",\n  \"layout\": {\n   \"h\": 8,\n   \"i\": \"38okd2m7\",\n   \"moved\": false,\n   \"w\": 10,\n   \"x\": 0,\n   \"y\": 27\n  },\n  \"type\": \"chart\"\n }\n]",
+    "linked_charts": [
+     {
+      "chart": "a14bo8tfqh",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "c90b678pde",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "lsr47noeia",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "v9p5od10gd",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "nm9l7vh8ck",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "p0mllvh99e",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "tmrlr0vgq2",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "7ihpp7ndd8",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "6agplub90k",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "f6fj2o866n",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     },
+     {
+      "chart": "gs5e33qfk8",
+      "parent": "1fuba75rfh",
+      "parentfield": "linked_charts",
+      "parenttype": "Insights Dashboard v3"
+     }
+    ],
+    "modified": "2025-04-02 18:54:15.379357",
+    "name": "1fuba75rfh",
+    "old_name": null,
+    "people_with_access": [],
+    "preview_image": null,
+    "read_only": false,
+    "share_link": null,
+    "title": " Accounts Dashboard",
+    "workbook": "15"
    }
 ]
