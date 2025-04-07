@@ -34,5 +34,29 @@
   "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"c5md39k08m\",\n  \"title\": \"tabCRM Deal\"\n }\n]",
   "read_only": false,
   "title": "Deals Workbook"
+ },
+ {
+    "charts": "[\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"fuokv6a223\",\n  \"query\": \"8afg7h753r\",\n  \"title\": \"Total Items\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"gi9uujardg\",\n  \"query\": \"fedunp27e6\",\n  \"title\": \"Total Stock Value\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"18uamvvnnt\",\n  \"query\": \"ebj88acrq8\",\n  \"title\": \"Total Warehouses\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"2689crnlmq\",\n  \"query\": \"fedunp27e6\",\n  \"title\": \"Warehouse-wise Stock Value\"\n },\n {\n  \"chart_type\": \"Line\",\n  \"name\": \"4bbrv599ov\",\n  \"query\": \"fedunp27e6\",\n  \"title\": \"Warehouse-Stock Value\"\n },\n {\n  \"chart_type\": \"Funnel\",\n  \"name\": \"5mmme2f0lf\",\n  \"query\": \"8afg7h753r\",\n  \"title\": \"ItemType-wise Count \"\n },\n {\n  \"chart_type\": \"Row\",\n  \"name\": \"8qlpbnvi66\",\n  \"query\": \"8afg7h753r\",\n  \"title\": \"Category-wise Item Count\"\n }\n]",
+    "dashboards": "[\n {\n  \"name\": \"rfpchl9ge9\",\n  \"title\": \"Stock Dashboard\"\n }\n]",
+    "data_backup": null,
+    "docstatus": 0,
+    "doctype": "Insights Workbook",
+    "modified": "2025-04-01 21:17:31.996032",
+    "name": 4,
+    "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"8afg7h753r\",\n  \"title\": \"tabItem\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"ebj88acrq8\",\n  \"title\": \"tabWarehouse\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"fedunp27e6\",\n  \"title\": \"tabBin\"\n }\n]",
+    "read_only": false,
+    "title": "Stock Workbook"
+   },
+ {
+    "charts": "[\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"a14bo8tfqh\",\n  \"query\": \"6b192s86fm\",\n  \"title\": \"Total Incoming Payment\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"c90b678pde\",\n  \"query\": \"6b192s86fm\",\n  \"title\": \"Total Outgoing Payment\"\n },\n {\n  \"chart_type\": \"Donut\",\n  \"name\": \"lsr47noeia\",\n  \"query\": \"kn3i3kn8h7\",\n  \"title\": \"Accounts Receivable Ageing\"\n },\n {\n  \"chart_type\": \"Donut\",\n  \"name\": \"v9p5od10gd\",\n  \"query\": \"ush5ljeeck\",\n  \"title\": \"Accounts Payable Ageing\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"nm9l7vh8ck\",\n  \"query\": \"nur5k02d6b\",\n  \"title\": \"Total Outgoing Bill Value\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"p0mllvh99e\",\n  \"query\": \"pni8mmuiae\",\n  \"title\": \"Total Incoming Bill Value\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"tmrlr0vgq2\",\n  \"query\": \"sebhlvs0ff\",\n  \"title\": \"Total Income\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"7ihpp7ndd8\",\n  \"query\": \"sebhlvs0ff\",\n  \"title\": \"Total Expense\"\n },\n {\n  \"chart_type\": \"Number\",\n  \"name\": \"6agplub90k\",\n  \"query\": \"sebhlvs0ff\",\n  \"title\": \"Total Profit\"\n },\n {\n  \"chart_type\": \"Bar\",\n  \"name\": \"f6fj2o866n\",\n  \"query\": \"kn3i3kn8h7\",\n  \"title\": \"Amount Receivable\"\n },\n {\n  \"chart_type\": \"Row\",\n  \"name\": \"gs5e33qfk8\",\n  \"query\": \"ush5ljeeck\",\n  \"title\": \"Amount Payable\"\n }\n]",
+    "dashboards": "[\n {\n  \"name\": \"1fuba75rfh\",\n  \"title\": \"\\u00a0Accounts Dashboard\"\n }\n]",
+    "data_backup": null,
+    "docstatus": 0,
+    "doctype": "Insights Workbook",
+    "modified": "2025-04-02 18:52:11.256921",
+    "name": 15,
+    "queries": "[\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"6b192s86fm\",\n  \"title\": \"tabPayment Entry\"\n },\n {\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"kn3i3kn8h7\",\n  \"title\": \"Sales Invoice\"\n },\n {\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"ush5ljeeck\",\n  \"title\": \"Purchase Invoice\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"nur5k02d6b\",\n  \"title\": \"tabSales Invoice\"\n },\n {\n  \"is_builder_query\": 1,\n  \"is_native_query\": 0,\n  \"is_script_query\": 0,\n  \"name\": \"pni8mmuiae\",\n  \"title\": \"tabPurchase Invoice\"\n },\n {\n  \"is_builder_query\": 0,\n  \"is_native_query\": 1,\n  \"is_script_query\": 0,\n  \"name\": \"sebhlvs0ff\",\n  \"title\": \"Query for P&L\"\n }\n]",
+    "read_only": false,
+    "title": "Accounts Workbook"
  }
 ]
