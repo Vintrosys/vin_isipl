@@ -81,7 +81,7 @@
    "description": null,
    "docstatus": 0,
    "dt": "Customer",
-   "fetch_from": "customer_primary_contact.full_name",
+   "fetch_from": "customer_primary_contact.first_name",
    "fetch_if_empty": 0,
    "fieldname": "custom_contact_person_name",
    "fieldtype": "Data",

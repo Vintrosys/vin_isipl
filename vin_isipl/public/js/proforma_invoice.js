@@ -40,8 +40,6 @@ frappe.ui.form.on('Quotation', {
         }
         if (frm.doc.order_type == "IMPPI") {
             frm.set_value('currency', 'USD');
-            frm.set_df_property('tc_name', 'reqd', 0); 
-            frm.set_df_property('tc_name', 'hidden', 1); 
 
         } else {
             frm.set_value('currency', 'INR');
