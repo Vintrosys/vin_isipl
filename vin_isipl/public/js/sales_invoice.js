@@ -68,6 +68,16 @@ frappe.ui.form.on('Sales Invoice', {
                         }
                     }
                 });
+                frappe.db.get_value('Customer', frm.doc.customer, 'custom_sales_person')
+                .then(r => {
+                    if (r.message && r.message.custom_sales_person) {
+                        frm.set_value('custom_sales_person', r.message.custom_sales_person);
+                    } else {
+                        if (!frm.doc.sales_person) {
+                            frm.set_value('custom_sales_person', '');
+                        }
+                    }
+                });
         } else {
             if (!frm.doc.custom_sales_person) {
                 frm.set_value('custom_sales_person', '');

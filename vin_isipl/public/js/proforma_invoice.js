@@ -68,6 +68,16 @@ frappe.ui.form.on('Quotation', {
                         }
                     }
                 });
+                frappe.db.get_value('Customer', frm.doc.party_name, 'custom_sales_person')
+                .then(r => {
+                    if (r.message && r.message.custom_sales_person) {
+                        frm.set_value('sales_person', r.message.custom_sales_person);
+                    } else {
+                        if (!frm.doc.sales_person) {
+                            frm.set_value('sales_person', '');
+                        }
+                    }
+                });
         } else {
             if (!frm.doc.sales_person) {
                 frm.set_value('sales_person', '');
