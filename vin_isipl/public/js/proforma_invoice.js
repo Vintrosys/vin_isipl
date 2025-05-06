@@ -5,6 +5,12 @@ frappe.ui.form.on('Quotation', {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
         }, 5);
 
+        if (frm.doc.docstatus === 0 && frm.doc.order_type === "IMPPI" && !frm._tax_reset_done) {
+            update_tax_fields(frm);            
+            
+            frm._tax_reset_done = true;
+        }
+
         if (!frm.is_new()) {           
             frm.add_custom_button('Save PDF', function () {
                 frappe.call({
@@ -22,9 +28,8 @@ frappe.ui.form.on('Quotation', {
         }        
     },
 
-
     onload: function (frm) {
-        frm.trigger('set_party_name'); 
+        frm.trigger('set_party_name');                 
     },
 
     party_name: function (frm) {
@@ -33,6 +38,7 @@ frappe.ui.form.on('Quotation', {
     },
 
     order_type: function (frm) {
+        update_tax_fields(frm);
         if (frm.doc.order_type == "STKPI" || frm.doc.order_type == "IMPPI") {
             frm.set_value('company', 'INNOVATIVE SEWING INDIA PRIVATE LIMITED');
         } else if (frm.doc.order_type == "SPPI" || frm.doc.order_type == "SRPI") {
@@ -40,7 +46,6 @@ frappe.ui.form.on('Quotation', {
         }
         if (frm.doc.order_type == "IMPPI") {
             frm.set_value('currency', 'USD');
-
         } else {
             frm.set_value('currency', 'INR');
             frm.set_df_property('tc_name', 'reqd', 1); 
@@ -104,4 +109,36 @@ function fetch_sales_person(frm, deal_owner) {
             }
         });
 }
+
+
+function update_tax_fields(frm) {
+
+    if (frm.doc.docstatus === 1) return;
+
+    if (frm.doc.order_type === "IMPPI") {
+               
+        frm.set_value("taxes_and_charges", null);
+        frm.clear_table("taxes");
+
+        let net_total = frm.doc.net_total || 0;
+        frm.set_value("total_taxes_and_charges", 0.0);
+        frm.set_value("grand_total", net_total);
+        frm.set_value("base_grand_total", frm.doc.base_net_total || net_total);
+        
+        // Hide taxes table
+        frm.set_df_property("taxes", "hidden", 1);
+        frm.set_df_property("total_taxes_and_charges", "hidden", 1);
+        $(frm.fields_dict.base_total_taxes_and_charges.$wrapper).closest(".frappe-control").hide();  
+        
+    } else {
+        // Show taxes table if not IMPPI
+        frm.set_df_property("taxes", "hidden", 0);
+        frm.set_df_property("base_total_taxes_and_charges", "hidden", 0);
+        $(frm.fields_dict.base_total_taxes_and_charges.$wrapper).closest(".frappe-control").show();
+    }
+
+    frm.refresh_fields(["taxes", "taxes_and_charges", "total_taxes_and_charges", "grand_total", "base_grand_total",]);
+    
+}
+
 
