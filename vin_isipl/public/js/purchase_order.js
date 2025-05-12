@@ -4,6 +4,10 @@ frappe.ui.form.on('Purchase Order', {
     },
     company: function (frm) {
         frm.trigger('set_naming_series');
+        if (frm.doc.company == "INNOVATIVE") {
+            frm.set_value('set_warehouse', 'Stores - INN');
+            frm.set_value('payment_terms_template', 'Immediate');
+        }
     },
     set_naming_series: function (frm) {
         const company = frm.doc.company;

@@ -39,6 +39,7 @@ frappe.ui.form.on('Quotation', {
 
     order_type: function (frm) {
         update_tax_fields(frm);
+        frm.trigger('set_terms');
         if (frm.doc.order_type == "STKPI" || frm.doc.order_type == "IMPPI") {
             frm.set_value('company', 'INNOVATIVE SEWING INDIA PRIVATE LIMITED');
         } else if (frm.doc.order_type == "SPPI" || frm.doc.order_type == "SRPI") {
@@ -58,8 +59,22 @@ frappe.ui.form.on('Quotation', {
             frm.set_value('naming_series', 'ISIPL-TPR-.FY.####');
         } else if (frm.doc.company == "INNOVATIVE") {
             frm.set_value('naming_series', 'INN-TPR-.FY.####');
+            frm.set_value('custom_isipl_bank_account', 'Innovative - IndusInd Bank');
+            frm.set_value('payment_terms_template', 'Immediate');
+            frm.set_value('custom_shipping_term', 'Ex - Works Tirupur');
         }
     },  
+    
+    set_terms: function (frm) {
+        if (frm.doc.company == "INNOVATIVE") {
+            if (frm.doc.order_type == "SRPI") {
+                frm.set_value('tc_name', 'Terms and Conditions - SERVICE AMC')
+            } else {
+                frm.set_value('tc_name', 'Terms and Conditions - STANDARD')
+            }
+        }
+
+    },
 
     set_party_name: function (frm) {
         if (frm.doc.party_name) {
