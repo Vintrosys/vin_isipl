@@ -29,18 +29,18 @@ frappe.ui.form.on('Sales Invoice', {
 
         if (invoice_type == "COMMISSION") {
             frm.set_value('naming_series', 'CINV/.FY.####');
-            frm.set_value('company', 'INNOVATIVE SEWING INDIA PRIVATE LIMITED');
+            frm.set_value('company', 'ISIPL');
             frm.set_df_property('company', 'read_only', 1);
 
         } else if (frm.doc.is_return) {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'ISIPL/CN/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/CN/.FY.####');
             }
 
         } else if (invoice_type == "CREDIT") {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'ISIPL/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/.FY.####');
@@ -48,7 +48,7 @@ frappe.ui.form.on('Sales Invoice', {
             frm.set_df_property('company', 'read_only', 0); 
 
         } else if (invoice_type == "CASH") {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'C/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/C/.FY.####');
