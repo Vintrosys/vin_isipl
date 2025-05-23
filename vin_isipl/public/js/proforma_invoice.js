@@ -41,7 +41,7 @@ frappe.ui.form.on('Quotation', {
         update_tax_fields(frm);
         frm.trigger('set_terms');
         if (frm.doc.order_type == "STKPI" || frm.doc.order_type == "IMPPI") {
-            frm.set_value('company', 'INNOVATIVE SEWING INDIA PRIVATE LIMITED');
+            frm.set_value('company', 'ISIPL');
         } else if (frm.doc.order_type == "SPPI" || frm.doc.order_type == "SRPI") {
             frm.set_value('company', 'INNOVATIVE');
         }
@@ -55,7 +55,7 @@ frappe.ui.form.on('Quotation', {
     },
 
     company: function (frm) {
-        if (frm.doc.company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+        if (frm.doc.company == "ISIPL") {
             frm.set_value('naming_series', 'ISIPL-TPR-.FY.####');
         } else if (frm.doc.company == "INNOVATIVE") {
             frm.set_value('naming_series', 'INN-TPR-.FY.####');

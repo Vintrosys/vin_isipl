@@ -13,21 +13,21 @@ frappe.ui.form.on('Payment Entry', {
         const payment_type = frm.doc.payment_type;
 
         if (payment_type == "Receive") {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'ISIPL/R/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/R/.FY.####');
             }
 
         } else if (payment_type == "Pay") {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'ISIPL/P/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/P/.FY.####');
             }
 
         } else if (payment_type == "Internal Transfer") {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'ISIPL/I/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/I/.FY.####');

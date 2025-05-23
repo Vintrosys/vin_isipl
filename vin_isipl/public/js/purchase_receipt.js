@@ -8,7 +8,7 @@ frappe.ui.form.on('Purchase Receipt', {
     set_naming_series: function (frm) {
         const company = frm.doc.company;
         if (frm.doc.is_return) {
-            if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+            if (company == "ISIPL") {
                 frm.set_value('naming_series', 'ISIPL/PR/.FY.####');
             } else if (company == "INNOVATIVE") {
                 frm.set_value('naming_series', 'INN/PR/.FY.####');
@@ -16,7 +16,7 @@ frappe.ui.form.on('Purchase Receipt', {
             frm.refresh_field("naming_series");
         }
         else{
-        if (company == "INNOVATIVE SEWING INDIA PRIVATE LIMITED") {
+        if (company == "ISIPL") {
             frm.set_value('naming_series', 'ISIPL/GRN/.FY.####');
         } else if (company == "INNOVATIVE") {
             frm.set_value('naming_series', 'INN/GRN/.FY.####');
