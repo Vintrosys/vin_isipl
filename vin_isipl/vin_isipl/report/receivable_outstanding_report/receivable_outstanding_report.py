@@ -859,7 +859,7 @@ class ReceivablePayableReport:
 	
 	def get_sales_invoices_or_customers_based_on_sales_person(self):
 		if self.filters.get("custom_sales_person"):
-			sales_person = self.filters.get("custom_sales_person")
+			sales_person_list = self.filters.get("custom_sales_person")
 
 			self.sales_person_records = frappe._dict()
 
@@ -867,7 +867,7 @@ class ReceivablePayableReport:
 			sales_invoices = frappe.get_all(
 				"Sales Invoice",
 				filters={
-					"custom_sales_person": sales_person,
+					"custom_sales_person": ["in", sales_person_list],
 					"docstatus": 1
 				},
 				pluck="name"
@@ -879,7 +879,7 @@ class ReceivablePayableReport:
 			# Get Customers linked with selected Sales Person
 			customers = frappe.get_all(
 				"Customer",
-				filters={"custom_sales_person": sales_person},
+				filters={"custom_sales_person": ["in", sales_person_list],},
 				pluck="name"
 			)
 

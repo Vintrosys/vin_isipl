@@ -68,8 +68,10 @@ frappe.query_reports["Receivable Outstanding Report"] = {
 		{
 			fieldname: "custom_sales_person",
 			label: __("Sales Person"),
-			fieldtype: "Link",
-			options: "Sales Person",
+			fieldtype: "MultiSelectList",
+			get_data: function (txt) {
+				return frappe.db.get_link_options("Sales Person", txt);
+			}
 		},
 		{
 			fieldname: "group_by_party",
@@ -77,28 +79,8 @@ frappe.query_reports["Receivable Outstanding Report"] = {
 			fieldtype: "Check",
 		},
 		{
-			fieldname: "based_on_payment_terms",
-			label: __("Based On Payment Terms"),
-			fieldtype: "Check",
-		},
-		{
-			fieldname: "show_future_payments",
-			label: __("Show Future Payments"),
-			fieldtype: "Check",
-		},
-		{
-			fieldname: "show_delivery_notes",
-			label: __("Show Linked Delivery Notes"),
-			fieldtype: "Check",
-		},
-		{
 			fieldname: "show_sales_person",
 			label: __("Show Sales Person"),
-			fieldtype: "Check",
-		},
-		{
-			fieldname: "show_remarks",
-			label: __("Show Remarks"),
 			fieldtype: "Check",
 		},
 		{
