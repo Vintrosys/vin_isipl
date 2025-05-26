@@ -253,7 +253,7 @@ doctype_js = {
     "Purchase Receipt": "public/js/purchase_receipt.js",
     "Purchase Invoice": "public/js/purchase_invoice.js",
     "Delivery Note": "public/js/delivery_note.js",
-    "Stock Entry": "public/js/stock_entry.js"
+    "Stock Entry": "public/js/stock_entry.js",
     }
 
 fixtures = [
@@ -263,3 +263,10 @@ fixtures = [
     {"dt": "Insights Dashboard v3"},
     {"dt": "DocType", "filters": [["name", "in", ["PI Version Tracker"]]]}
 ]
+
+app_include_js = "/assets/vin_isipl/js/override_update_child_items.js"
+
+override_whitelisted_methods = {
+    "erpnext.controllers.accounts_controller.update_child_qty_rate": "vin_isipl.utils.accounts_controller.update_child_qty_rate"
+}
+
