@@ -9,9 +9,31 @@ frappe.ui.form.on('Quotation', {
             update_tax_fields(frm);            
             
             frm._tax_reset_done = true;
-        }
+        }        
 
-        if (!frm.is_new()) {           
+        if (!frm.is_new()) {     
+            frm.add_custom_button(__('Print PDF'), function () {
+                let format = '';
+
+                switch (frm.doc.order_type) {
+                    case 'STKPI':
+                        format = 'Machine PI';
+                        break;
+                    case 'IMPPI':
+                        format = 'Import PI';
+                        break;
+                    case 'SPPI':
+                        format = 'Spares PI';
+                        break;
+                    case 'SRPI':
+                        format = 'Service PI';
+                        break;
+                }
+
+                let url = `/api/method/frappe.utils.print_format.download_pdf?doctype=${frm.doc.doctype}&name=${frm.doc.name}&format=${format}`;
+                window.open(url, '_blank');
+            });
+      
             frm.add_custom_button('Save PDF', function () {
                 frappe.call({
                     method: "vin_isipl.utils.pi_version_tracker.save_to_table",

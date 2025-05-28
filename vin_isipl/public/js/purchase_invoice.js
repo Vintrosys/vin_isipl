@@ -1,4 +1,5 @@
 frappe.ui.form.on('Purchase Invoice', {
+    
     onload: function (frm) {        
         frm.trigger('set_naming_series');  
     },
