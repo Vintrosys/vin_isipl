@@ -143,9 +143,25 @@ before_uninstall = "vin_isipl.uninstall.before_uninstall"
 doc_events = {
 	"Customer": {
 		"after_insert":"vin_isipl.utils.isipl_crm.create_org"
-	}
-}
+	},
+    "Quotation": {
+        "on_update": "vin_isipl.utils.proforma_invoice.on_update"
+    },
+    "Sales Invoice": {
+        "on_update": "vin_isipl.utils.sales_invoice.on_update"
+    },
+    "Purchase Order": {
+        "on_update": "vin_isipl.utils.purchase_order.on_update"
+    },
+    "Purchase Receipt": {
+        "on_update": "vin_isipl.utils.purchase_receipt.on_update"
+    },
+    
 
+}
+# "Purchase Order": {
+        # "validate": "vin_isipl.utils.purchase_order.on_validate"
+    # },
 # Scheduled Tasks
 # ---------------
 
