@@ -1,30 +1,18 @@
-
 import frappe
 from erpnext.selling.doctype.customer import customer
 
 def custom_make_contact(args, is_primary_contact=1):
+    # Validate required field
+    if not args.get("custom_contact_person_name"):
+        frappe.throw("Please provide the Contact Person Name.")
 
     values = {
         "doctype": "Contact",
         "is_primary_contact": is_primary_contact,
         "links": [{"link_doctype": args.get("doctype"), "link_name": args.get("name")}],
+        "first_name": args.get("custom_contact_person_name"),
+        "company_name": args.get("customer_name") if args.doctype == "Customer" else args.get("supplier_name"),
     }
-
-    party_type = args.customer_type if args.doctype == "Customer" else args.supplier_type
-    party_name_key = "customer_name" if args.doctype == "Customer" else "supplier_name"
-
-    if party_type == "Individual":
-        first, middle, last = customer.parse_full_name(args.get(party_name_key))
-        values.update({
-            "first_name": first,
-            "middle_name": middle,
-            "last_name": last,
-        })
-    else:
-        values.update({
-            "first_name": args.custom_contact_person_name,
-            "company_name": args.get(party_name_key),
-        })
 
     contact = frappe.get_doc(values)
 
