@@ -2,7 +2,7 @@ frappe.ui.form.on('Sales Invoice', {
     refresh: function (frm){
         if (!frm.is_new()) {    
             frm.add_custom_button(__('Print PDF'), function () {
-                let format = 'Commercial Invoice - Main';
+                let format = 'Commercial Invoice';
                 let url = `/api/method/frappe.utils.print_format.download_pdf?doctype=${frm.doc.doctype}&name=${frm.doc.name}&format=${format}`;
                 window.open(url, '_blank');
             });
