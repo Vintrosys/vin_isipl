@@ -262,7 +262,7 @@ doc_events = {
 doctype_js = {
     "Item" : "public/js/item.js",
     "Quotation" : "public/js/proforma_invoice.js",
-    "Sales Invoice" : "public/js/sales_invoice.js",
+    "Sales Invoice" : "public/js/sales_invoice.js",    
     "Payment Entry": "public/js/payment_entry.js",
     "Journal Entry": "public/js/journal_entry.js",
     "Purchase Order": "public/js/purchase_order.js",
@@ -270,6 +270,13 @@ doctype_js = {
     "Purchase Invoice": "public/js/purchase_invoice.js",
     "Delivery Note": "public/js/delivery_note.js",
     "Stock Entry": "public/js/stock_entry.js",
+    }
+
+doctype_list_js = {
+    "Sales Invoice" : "public/js/sales_invoice_list.js",
+    "Purchase Order": "public/js/purchase_order_list.js",
+    "Purchase Receipt": "public/js/purchase_receipt_list.js",
+    "Quotation" : "public/js/proforma_invoice_list.js",
     }
 
 fixtures = [
