@@ -1,4 +1,6 @@
-frappe.listview_settings['Quotation'] = {
+frappe.listview_settings['Quotation'] = frappe.listview_settings['Quotation'] || {};
+
+Object.assign(frappe.listview_settings['Quotation'], {
     formatters: {
         custom_print_pdf(value, doc) {
             if (value) {
@@ -13,4 +15,4 @@ frappe.listview_settings['Quotation'] = {
             }
         }
     }
-};
+});

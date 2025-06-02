@@ -1,4 +1,6 @@
-frappe.listview_settings['Sales Invoice'] = {
+frappe.listview_settings['Sales Invoice'] = frappe.listview_settings['Sales Invoice'] || {};
+
+Object.assign(frappe.listview_settings['Sales Invoice'], {
     formatters: {
         custom_print_pdf(value, doc) {
             if (value) {
@@ -13,4 +15,4 @@ frappe.listview_settings['Sales Invoice'] = {
             }
         }
     }
-};
+});

@@ -279,6 +279,10 @@ doctype_list_js = {
     "Quotation" : "public/js/proforma_invoice_list.js",
     }
 
+# doctype_list_js = {
+#     "Sales Invoice" : "public/js/sales_invoice_list.js",
+# }
+
 fixtures = [
     {"dt": "Insights Workbook"},
     {"dt": "Insights Chart v3"},
@@ -292,4 +296,9 @@ app_include_js = "/assets/vin_isipl/js/override_update_child_items.js"
 override_whitelisted_methods = {
     "erpnext.controllers.accounts_controller.update_child_qty_rate": "vin_isipl.utils.accounts_controller.update_child_qty_rate"
 }
+
+override_doctype_class = {
+    "Sales Invoice": "vin_isipl.utils.sales_invoice.CustomSalesInvoice"
+}
+
 
