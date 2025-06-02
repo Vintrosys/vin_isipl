@@ -1,4 +1,6 @@
-frappe.listview_settings['Purchase Receipt'] = {
+frappe.listview_settings['Purchase Receipt'] = frappe.listview_settings['Purchase Receipt'] || {};
+
+Object.assign(frappe.listview_settings['Purchase Receipt'], {
     formatters: {
         custom_print_pdf(value, doc) {
             if (value) {
@@ -13,4 +15,4 @@ frappe.listview_settings['Purchase Receipt'] = {
             }
         }
     }
-};
+});

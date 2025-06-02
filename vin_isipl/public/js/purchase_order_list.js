@@ -1,4 +1,6 @@
-frappe.listview_settings['Purchase Order'] = {
+frappe.listview_settings['Purchase Order'] = frappe.listview_settings['Purchase Order'] || {};
+
+Object.assign(frappe.listview_settings['Purchase Order'], {
     formatters: {
         custom_print_pdf(value, doc) {
             if (value) {
@@ -13,4 +15,4 @@ frappe.listview_settings['Purchase Order'] = {
             }
         }
     }
-};
+});

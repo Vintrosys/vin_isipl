@@ -11,7 +11,7 @@ frappe.ui.form.on('Quotation', {
             frm._tax_reset_done = true;
         }        
 
-        if (!frm.is_new()) {     
+        if (frm.doc.name && frm.doc.creation && frm.doc.docstatus < 2) {  
             frm.add_custom_button(__('Print PDF'), function () {
                 let format = '';
 
