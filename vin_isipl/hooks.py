@@ -279,10 +279,7 @@ doctype_list_js = {
     "Quotation" : "public/js/proforma_invoice_list.js",
     }
 
-# doctype_list_js = {
-#     "Sales Invoice" : "public/js/sales_invoice_list.js",
-# }
-
+    
 fixtures = [
     {"dt": "Insights Workbook"},
     {"dt": "Insights Chart v3"},
