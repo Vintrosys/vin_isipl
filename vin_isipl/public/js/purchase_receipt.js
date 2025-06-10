@@ -11,6 +11,24 @@ frappe.ui.form.on('Purchase Receipt', {
     onload: function (frm) {        
         frm.trigger('set_naming_series');  
     },
+
+    validate: function(frm) {
+        let has_error = false;
+
+        frm.doc.items.forEach((item, i) => {
+            if (flt(item.custom_total_qty) < flt(item.qty)) {
+                frappe.msgprint(
+                    `Row ${item.idx}: Total Qty cannot be less than Accepted Qty`
+                );
+                has_error = true;
+            }
+        });
+
+        if (has_error) {
+            frappe.validated = false;  
+        }
+    },
+
     company: function (frm) {
         frm.trigger('set_naming_series');
     },
@@ -33,3 +51,23 @@ frappe.ui.form.on('Purchase Receipt', {
     }
     }
 })
+
+frappe.ui.form.on('Purchase Receipt Item', {
+    custom_total_qty(frm, cdt, cdn) {
+        calculate_balance_qty(cdt, cdn);
+    },
+    qty(frm, cdt, cdn) {
+        calculate_balance_qty(cdt, cdn);
+    }
+});
+
+let qty_validation_flag = false;  
+
+function calculate_balance_qty(cdt, cdn) {
+    let item = locals[cdt][cdn];
+    let total = flt(item.custom_total_qty);
+    let accepted = flt(item.qty);
+    let balance = total - accepted;
+
+    frappe.model.set_value(cdt, cdn, 'custom_balance_quantity', balance);
+}
