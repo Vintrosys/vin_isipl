@@ -154,10 +154,9 @@ doc_events = {
         "on_update": "vin_isipl.utils.purchase_order.on_update"
     },
     "Purchase Receipt": {
-        "on_update": "vin_isipl.utils.purchase_receipt.on_update"
-    },
-    
-
+        "on_update": "vin_isipl.utils.purchase_receipt.on_update",
+        "validate": "vin_isipl.utils.purchase_receipt.validate"
+    },   
 }
 # "Purchase Order": {
         # "validate": "vin_isipl.utils.purchase_order.on_validate"
