@@ -294,7 +294,8 @@ override_whitelisted_methods = {
 }
 
 override_doctype_class = {
-    "Sales Invoice": "vin_isipl.utils.sales_invoice.CustomSalesInvoice"
+    "Sales Invoice": "vin_isipl.utils.sales_invoice.CustomSalesInvoice",
+    "Payment Entry": "vin_isipl.utils.payment_entry.CustomPaymentEntry"
 }
 
 
