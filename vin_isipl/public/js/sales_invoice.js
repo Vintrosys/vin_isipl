@@ -31,6 +31,17 @@ frappe.ui.form.on('Sales Invoice', {
         frm.trigger('set_sales_person');  
     },
 
+    update_stock: function (frm) {
+        console.log(frm.doc.update_stock)
+        if (frm.doc.update_stock) {
+            if (frm.doc.company == "ISIPL") {
+                frm.set_value('set_warehouse', 'Godown - ISIPL');
+            } else if (frm.doc.company == "INNOVATIVE") {
+                frm.set_value('set_warehouse', 'Stores - INN');
+            }    
+        }
+    },
+
     set_naming_series: function (frm) {
         const company = frm.doc.company;
         const invoice_type = frm.doc.custom_invoice_type;
