@@ -3,6 +3,7 @@ frappe.ui.form.on('Quotation', {
     refresh: function (frm) {
         setTimeout(() => {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
+            $(frm.page.wrapper).find('.btn:contains("Submit")').remove();
         }, 5);
 
         if (frm.doc.docstatus === 0 && frm.doc.order_type === "IMPPI" && !frm._tax_reset_done) {

@@ -11,8 +11,8 @@ frappe.ui.form.on('Sales Invoice', {
     onload: function (frm) {        
         frm.trigger('set_naming_series');
         if (!frm.doc.custom_sales_person) {  
-        frm.trigger('set_sales_person'); 
-        }
+            frm.trigger('set_sales_person'); 
+        }        
     },
 
     custom_invoice_type: function (frm) {
@@ -21,6 +21,7 @@ frappe.ui.form.on('Sales Invoice', {
 
     company: function (frm) {
         frm.trigger('set_naming_series');
+        frm.trigger('set_default_wh');
     },
 
     is_return: function (frm) {
@@ -31,8 +32,17 @@ frappe.ui.form.on('Sales Invoice', {
         frm.trigger('set_sales_person');  
     },
 
-    update_stock: function (frm) {
-        console.log(frm.doc.update_stock)
+    custom_sales_category: function (frm) {
+        if (frm.doc.custom_sales_category == "Service Sales") {
+            frm.set_value('update_stock', 0);
+        }
+        else {
+            frm.set_value('update_stock', 1);
+        }
+        frm.trigger('set_default_wh');
+    },
+
+    set_default_wh: function (frm) {        
         if (frm.doc.update_stock) {
             if (frm.doc.company == "ISIPL") {
                 frm.set_value('set_warehouse', 'Godown - ISIPL');
