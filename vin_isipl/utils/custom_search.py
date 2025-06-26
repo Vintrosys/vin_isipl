@@ -36,8 +36,7 @@ def custom_search_link(
     filters=None,
     reference_doctype=None,
     ignore_user_permissions=False,
-):
-    frappe.log_error(f"[Search] custom_search_link called with: {doctype}", "DEBUG")
+):    
     meta = frappe.get_meta(doctype)
     has_custom_search_key = any(df.fieldname == "custom_search_key" for df in meta.fields)
     has_disabled = any(df.fieldname == "disabled" and df.fieldtype == "Check" for df in meta.fields)
