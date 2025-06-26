@@ -156,7 +156,16 @@ doc_events = {
     "Purchase Receipt": {
         "on_update": "vin_isipl.utils.purchase_receipt.on_update",
         "validate": "vin_isipl.utils.purchase_receipt.validate"
-    },   
+    },  
+    "Item": {
+        "before_save": "vin_isipl.utils.custom_search.before_save"
+    },
+    "Customer": {
+        "before_save": "vin_isipl.utils.custom_search.before_save"
+    },
+    "Supplier": {
+        "before_save": "vin_isipl.utils.custom_search.before_save"
+    },
 }
 # "Purchase Order": {
         # "validate": "vin_isipl.utils.purchase_order.on_validate"
@@ -290,7 +299,9 @@ fixtures = [
 app_include_js = "/assets/vin_isipl/js/override_update_child_items.js"
 
 override_whitelisted_methods = {
-    "erpnext.controllers.accounts_controller.update_child_qty_rate": "vin_isipl.utils.accounts_controller.update_child_qty_rate"
+    "erpnext.controllers.accounts_controller.update_child_qty_rate": "vin_isipl.utils.accounts_controller.update_child_qty_rate",
+    "frappe.desk.search.search_link": "vin_isipl.utils.custom_search.custom_search_link"
+
 }
 
 override_doctype_class = {
