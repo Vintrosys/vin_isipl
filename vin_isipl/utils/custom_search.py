@@ -40,6 +40,11 @@ def custom_search_link(
     frappe.log_error(f"[Search] custom_search_link called with: {doctype}", "DEBUG")
     meta = frappe.get_meta(doctype)
     has_custom_search_key = any(df.fieldname == "custom_search_key" for df in meta.fields)
+    has_disabled = any(df.fieldname == "disabled" and df.fieldtype == "Check" for df in meta.fields)
+
+    where_clause = "custom_search_key LIKE %(txt)s"
+    if has_disabled:
+        where_clause += " AND disabled = 0"
 
 
     if not has_custom_search_key:
@@ -63,7 +68,7 @@ def custom_search_link(
     results = frappe.db.sql(f"""
         SELECT {field_sql}
         FROM `tab{doctype}`
-        WHERE custom_search_key LIKE %(txt)s
+        WHERE {where_clause}
         ORDER BY modified DESC
         LIMIT %(start)s, %(page_len)s
     """, {
