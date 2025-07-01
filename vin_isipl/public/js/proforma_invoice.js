@@ -1,14 +1,14 @@
 frappe.ui.form.on('Quotation', {
     
     refresh: function (frm) {
+
         setTimeout(() => {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
-            $(frm.page.wrapper).find('.btn:contains("Submit")').remove();
+            // $(frm.page.wrapper).find('.btn:contains("Submit")').remove();
         }, 5);
 
-        if (frm.doc.docstatus === 0 && frm.doc.order_type === "IMPPI" && !frm._tax_reset_done) {
-            update_tax_fields(frm);            
-            
+        if (frm.doc.docstatus === 0 && frm.doc.order_type === "Import PI" && !frm._tax_reset_done) {
+            update_tax_fields(frm);         
             frm._tax_reset_done = true;
         }        
 
@@ -17,16 +17,16 @@ frappe.ui.form.on('Quotation', {
                 let format = '';
 
                 switch (frm.doc.order_type) {
-                    case 'STKPI':
+                    case 'Stock PI':
                         format = 'Machine PI';
                         break;
-                    case 'IMPPI':
+                    case 'Import PI':
                         format = 'Import PI';
                         break;
-                    case 'SPPI':
+                    case 'Spares PI':
                         format = 'Spares PI';
                         break;
-                    case 'SRPI':
+                    case 'Service PI':
                         format = 'Service PI';
                         break;
                 }
@@ -50,54 +50,67 @@ frappe.ui.form.on('Quotation', {
             });
         }        
     },
-
-    onload: function (frm) {
-        frm.trigger('set_party_name');                 
-    },
-
+    
     party_name: function (frm) {
         frm.set_value('sales_person', '');
         frm.trigger('set_party_name');  
     },
 
-    order_type: function (frm) {
-        update_tax_fields(frm);
-        frm.trigger('set_terms');
-        if (frm.doc.order_type == "STKPI" || frm.doc.order_type == "IMPPI") {
+    order_type: function (frm) {   
+       
+        if (frm.doc.order_type == "Stock PI" || frm.doc.order_type == "Import PI") {
             frm.set_value('company', 'ISIPL');
-        } else if (frm.doc.order_type == "SPPI" || frm.doc.order_type == "SRPI") {
+        } else if (frm.doc.order_type == "Spares PI" || frm.doc.order_type == "Service PI") {
             frm.set_value('company', 'INNOVATIVE');
         }
-        if (frm.doc.order_type == "IMPPI") {
-            frm.set_value('currency', 'USD');
-            frm.set_df_property('tc_name', 'reqd', 0); 
-            frm.set_df_property('tc_name', 'hidden', 1); 
-        } else {
-            frm.set_value('currency', 'INR');
-            frm.set_df_property('tc_name', 'reqd', 1); 
-            frm.set_df_property('tc_name', 'hidden', 0); 
-        }
+
+        setTimeout(() => {
+            if (frm.doc.order_type == "Import PI") {
+                frm.set_value('currency', 'USD');
+                frm.set_df_property('tc_name', 'reqd', 0); 
+                frm.set_df_property('tc_name', 'hidden', 1); 
+            } else {
+                frm.set_value('currency', 'INR');
+                frm.set_df_property('tc_name', 'reqd', 1); 
+                frm.set_df_property('tc_name', 'hidden', 0); 
+            }
+
+            frm.trigger('set_terms');
+            update_tax_fields(frm);
+        }, 300); 
     },
 
     company: function (frm) {
         if (frm.doc.company == "ISIPL") {
             frm.set_value('naming_series', 'ISIPL-TPR-.FY.####');
+            frm.set_value('tc_name', '')
+            frm.set_value('custom_isipl_bank_account', '');
+            frm.set_value('payment_terms_template', '');
+            frm.set_value('custom_shipping_term', '');
         } else if (frm.doc.company == "INNOVATIVE") {
             frm.set_value('naming_series', 'INN-TPR-.FY.####');
             frm.set_value('custom_isipl_bank_account', 'Innovative - IndusInd Bank');
             frm.set_value('payment_terms_template', 'Immediate');
             frm.set_value('custom_shipping_term', 'Ex - Works Tirupur');
-        }
-    },  
-    
-    set_terms: function (frm) {
-        if (frm.doc.company == "INNOVATIVE") {
-            if (frm.doc.order_type == "SRPI") {
+            if (frm.doc.order_type == "Service PI") {
                 frm.set_value('tc_name', 'Terms and Conditions - SERVICE AMC')
             } else {
                 frm.set_value('tc_name', 'Terms and Conditions - STANDARD')
             }
         }
+    },  
+    
+    set_terms: function (frm) {
+        if (frm.doc.company == "ISIPL") {
+            frm.set_value('tc_name', '')
+        }
+        else {
+            if (frm.doc.order_type == "Service PI") {
+                frm.set_value('tc_name', 'Terms and Conditions - SERVICE AMC')
+            } else {
+                frm.set_value('tc_name', 'Terms and Conditions - STANDARD')
+            }
+        }  
 
     },
 
@@ -155,7 +168,7 @@ function update_tax_fields(frm) {
 
     if (frm.doc.docstatus === 1) return;
 
-    if (frm.doc.order_type === "IMPPI") {
+    if (frm.doc.order_type === "Import PI") {
                
         frm.set_value("taxes_and_charges", null);
         frm.clear_table("taxes");
@@ -171,7 +184,7 @@ function update_tax_fields(frm) {
         $(frm.fields_dict.base_total_taxes_and_charges.$wrapper).closest(".frappe-control").hide();  
         
     } else {
-        // Show taxes table if not IMPPI
+        // Show taxes table if not Import PI
         frm.set_df_property("taxes", "hidden", 0);
         frm.set_df_property("base_total_taxes_and_charges", "hidden", 0);
         $(frm.fields_dict.base_total_taxes_and_charges.$wrapper).closest(".frappe-control").show();

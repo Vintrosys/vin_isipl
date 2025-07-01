@@ -32,12 +32,14 @@ frappe.ui.form.on('Sales Invoice', {
         frm.trigger('set_sales_person');  
     },
 
+    // Stock update not required for spares as of now -- to be enabled from APR 2026
+
     custom_sales_category: function (frm) {
-        if (frm.doc.custom_sales_category == "Service Sales") {
-            frm.set_value('update_stock', 0);
+        if (frm.doc.custom_sales_category == "Product Sales") {
+            frm.set_value('update_stock', 1);
         }
         else {
-            frm.set_value('update_stock', 1);
+            frm.set_value('update_stock', 0);
         }
         frm.trigger('set_default_wh');
     },
@@ -46,8 +48,9 @@ frappe.ui.form.on('Sales Invoice', {
         if (frm.doc.update_stock) {
             if (frm.doc.company == "ISIPL") {
                 frm.set_value('set_warehouse', 'Godown - ISIPL');
-            } else if (frm.doc.company == "INNOVATIVE") {
-                frm.set_value('set_warehouse', 'Stores - INN');
+            } 
+            else {
+                frm.set_value('set_warehouse', '');
             }    
         }
     },
