@@ -7,13 +7,13 @@ def save_to_table(quotation_name):
     quotation = frappe.get_doc('Quotation', quotation_name)
     
     print_format = ""
-    if quotation.order_type == "STKPI":
+    if quotation.order_type == "Stock PI":
         print_format = "Machine PI"
-    elif quotation.order_type == "IMPPI":
+    elif quotation.order_type == "Import PI":
         print_format = "Import PI"
-    elif quotation.order_type == "SPPI":
+    elif quotation.order_type == "Spares PI":
         print_format = "Spares PI"
-    elif quotation.order_type == "SRPI":
+    elif quotation.order_type == "Service PI":
         print_format = "Service PI"
     pdf_data = get_pdf(frappe.get_print('Quotation', quotation_name, print_format))
 

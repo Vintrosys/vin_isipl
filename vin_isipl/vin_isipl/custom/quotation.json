@@ -486,7 +486,7 @@
    "label": "Bank Account",
    "length": 0,
    "link_filters": null,
-   "mandatory_depends_on": "eval: doc.order_type != \"IMPPI\"",
+   "mandatory_depends_on": "eval: doc.order_type != \"Import PI\"",
    "modified": "2025-03-25 04:56:53.291543",
    "modified_by": "Administrator",
    "module": null,
@@ -2101,7 +2101,7 @@
    "property": "options",
    "property_type": "Small Text",
    "row_name": null,
-   "value": "STKPI\nIMPPI\nSPPI\nSRPI"
+   "value": "Stock PI\nImport PI\nSpares PI\nService PI"
   },
   {
    "_assign": null,
@@ -2515,7 +2515,7 @@
    "property": "mandatory_depends_on",
    "property_type": "Data",
    "row_name": null,
-   "value": "eval: doc.order_type != \"IMPPI\""
+   "value": "eval: doc.order_type != \"Import PI\""
   },
   {
    "_assign": null,

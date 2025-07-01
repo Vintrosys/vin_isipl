@@ -4,10 +4,10 @@ from vin_isipl.utils.pdf import attach_pdf
 def on_update(doc, method=None):
     
     print_format_map = {
-        "STKPI": "Machine PI",
-        "IMPPI": "Import PI",
-        "SPPI": "Spares PI",
-        "SRPI": "Service PI"
+        "Stock PI": "Machine PI",
+        "Import PI": "Import PI",
+        "Spares PI": "Spares PI",
+        "Service PI": "Service PI"
     }
        
     frappe.enqueue(
