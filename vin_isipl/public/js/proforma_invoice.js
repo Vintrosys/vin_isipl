@@ -7,10 +7,9 @@ frappe.ui.form.on('Quotation', {
             // $(frm.page.wrapper).find('.btn:contains("Submit")').remove();
         }, 5);
 
-        if (frm.doc.docstatus === 0 && frm.doc.order_type === "Import PI" && !frm._tax_reset_done) {
-            update_tax_fields(frm);         
-            frm._tax_reset_done = true;
-        }        
+        // if (frm.doc.docstatus === 0 && frm.doc.order_type === "Import PI") {
+        //     frm.set_value('taxes_and_charges', 'Import Tax - ISIPL');        
+        // }        
 
         if (frm.doc.name && frm.doc.creation && frm.doc.docstatus < 2) {  
             frm.add_custom_button(__('Print PDF'), function () {
@@ -60,6 +59,8 @@ frappe.ui.form.on('Quotation', {
        
         if (frm.doc.order_type == "Stock PI" || frm.doc.order_type == "Import PI") {
             frm.set_value('company', 'ISIPL');
+            frm.set_value('taxes_and_charges', 'Import Tax - ISIPL');
+            frm.trigger('set_party_name');  
         } else if (frm.doc.order_type == "Spares PI" || frm.doc.order_type == "Service PI") {
             frm.set_value('company', 'INNOVATIVE');
         }
@@ -67,6 +68,7 @@ frappe.ui.form.on('Quotation', {
         setTimeout(() => {
             if (frm.doc.order_type == "Import PI") {
                 frm.set_value('currency', 'USD');
+                frm.set_value('taxes_and_charges', 'Import Tax - ISIPL');
                 frm.set_df_property('tc_name', 'reqd', 0); 
                 frm.set_df_property('tc_name', 'hidden', 1); 
             } else {
@@ -76,7 +78,7 @@ frappe.ui.form.on('Quotation', {
             }
 
             frm.trigger('set_terms');
-            update_tax_fields(frm);
+            // update_tax_fields(frm);
         }, 300); 
     },
 
@@ -162,36 +164,4 @@ function fetch_sales_person(frm, deal_owner) {
             }
         });
 }
-
-
-function update_tax_fields(frm) {
-
-    if (frm.doc.docstatus === 1) return;
-
-    if (frm.doc.order_type === "Import PI") {
-               
-        frm.set_value("taxes_and_charges", null);
-        frm.clear_table("taxes");
-
-        let net_total = frm.doc.net_total || 0;
-        frm.set_value("total_taxes_and_charges", 0.0);
-        frm.set_value("grand_total", net_total);
-        frm.set_value("base_grand_total", frm.doc.base_net_total || net_total);
-        
-        // Hide taxes table
-        frm.set_df_property("taxes", "hidden", 1);
-        frm.set_df_property("total_taxes_and_charges", "hidden", 1);
-        $(frm.fields_dict.base_total_taxes_and_charges.$wrapper).closest(".frappe-control").hide();  
-        
-    } else {
-        // Show taxes table if not Import PI
-        frm.set_df_property("taxes", "hidden", 0);
-        frm.set_df_property("base_total_taxes_and_charges", "hidden", 0);
-        $(frm.fields_dict.base_total_taxes_and_charges.$wrapper).closest(".frappe-control").show();
-    }
-
-    frm.refresh_fields(["taxes", "taxes_and_charges", "total_taxes_and_charges", "grand_total", "base_grand_total",]);
-    
-}
-
 
