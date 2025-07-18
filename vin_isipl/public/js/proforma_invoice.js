@@ -5,11 +5,7 @@ frappe.ui.form.on('Quotation', {
         setTimeout(() => {
             $(frm.page.wrapper).find('.btn:contains("Get Items From")').remove();
             // $(frm.page.wrapper).find('.btn:contains("Submit")').remove();
-        }, 5);
-
-        // if (frm.doc.docstatus === 0 && frm.doc.order_type === "Import PI") {
-        //     frm.set_value('taxes_and_charges', 'Import Tax - ISIPL');        
-        // }        
+        }, 5);       
 
         if (frm.doc.name && frm.doc.creation && frm.doc.docstatus < 2) {  
             frm.add_custom_button(__('Print PDF'), function () {
@@ -52,23 +48,20 @@ frappe.ui.form.on('Quotation', {
     
     party_name: function (frm) {
         frm.set_value('sales_person', '');
-        frm.trigger('set_party_name');  
+        frm.trigger('set_party_name'); 
     },
 
-    order_type: function (frm) {   
-       
-        if (frm.doc.order_type == "Stock PI" || frm.doc.order_type == "Import PI") {
+    order_type: function (frm) { 
+        if (frm.doc.order_type == "Import PI" || frm.doc.order_type == "Stock PI") {
             frm.set_value('company', 'ISIPL');
-            frm.set_value('taxes_and_charges', 'Import Tax - ISIPL');
-            frm.trigger('set_party_name');  
-        } else if (frm.doc.order_type == "Spares PI" || frm.doc.order_type == "Service PI") {
+        }else if (frm.doc.order_type == "Spares PI" || frm.doc.order_type == "Service PI") {
             frm.set_value('company', 'INNOVATIVE');
         }
 
         setTimeout(() => {
             if (frm.doc.order_type == "Import PI") {
                 frm.set_value('currency', 'USD');
-                frm.set_value('taxes_and_charges', 'Import Tax - ISIPL');
+                frm.set_value('tax_category', 'Nil Tax');
                 frm.set_df_property('tc_name', 'reqd', 0); 
                 frm.set_df_property('tc_name', 'hidden', 1); 
             } else {
@@ -80,6 +73,7 @@ frappe.ui.form.on('Quotation', {
             frm.trigger('set_terms');
             // update_tax_fields(frm);
         }, 300); 
+        frm.trigger('party_name');
     },
 
     company: function (frm) {

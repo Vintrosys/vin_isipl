@@ -19,7 +19,7 @@ def get_quotation_url(crm_deal, organization):
 			customer = org
 	if not erpnext_crm_settings.is_erpnext_in_different_site:
 		quotation_url = get_url_to_list("Quotation")
-		return f"{quotation_url}/new?quotation_to=Customer&party_name={customer}&company={erpnext_crm_settings.erpnext_company}"
+		return f"{quotation_url}/new?quotation_to=Customer&party_name={customer}&crm_deal={crm_deal}&company={erpnext_crm_settings.erpnext_company}"
     
 @frappe.whitelist()
 def get_customer_link(crm_deal):
