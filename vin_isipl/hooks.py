@@ -304,9 +304,9 @@ app_license = "mit"
 
 # }
 
-override_doctype_class = {
-    "Leave Application": "vin_isipl.utils.pwa_notifications.CustomLeaveApplication"
-}
+# override_doctype_class = {
+#     "Leave Application": "vin_isipl.utils.pwa_notifications.CustomLeaveApplication"
+# }
 
 
 # "Sales Invoice": "vin_isipl.utils.sales_invoice.CustomSalesInvoice",
