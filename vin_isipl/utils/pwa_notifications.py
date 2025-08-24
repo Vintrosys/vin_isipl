@@ -37,7 +37,7 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 
 		if wf_state == "Approved":
 			from_user = self.leave_approver
-			to_user = self.leave_authorizer
+			to_user = leave_authorizer
 			notification = frappe.new_doc("PWA Notification")
 			notification.message = (
 				f"{self.employee_name} raised a new {self.doctype} to authorize: {self.name}"
