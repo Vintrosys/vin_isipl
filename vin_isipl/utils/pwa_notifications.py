@@ -29,10 +29,15 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 			notification.insert(ignore_permissions=True)
 
 		wf_state = self.workflow_state
+		leave_authorizer = frappe.db.get_value(
+			"Department Approver",
+			{"parent": self.department, "parentfield": "leave_approvers", "idx": 2},
+			"approver",
+		)
 
 		if wf_state == "Approved":
 			from_user = self.leave_approver
-			to_user = self.custom_leave_authorizer
+			to_user = self.leave_authorizer
 			notification = frappe.new_doc("PWA Notification")
 			notification.message = (
 				f"{self.employee_name} raised a new {self.doctype} to authorize: {self.name}"
@@ -44,7 +49,7 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 			notification.insert(ignore_permissions=True)
 
 		if wf_state in ["Authorized"]:
-			from_user = self.custom_leave_authorizer
+			from_user = leave_authorizer
 			from_user_name = self._get_user_name(from_user)
 			to_user = self._get_employee_user()
 			notification = frappe.new_doc("PWA Notification")
