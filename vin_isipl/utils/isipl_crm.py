@@ -48,3 +48,8 @@ def create_org(doc,action):
 		org.organization_name = doc.name
 		org.insert()
 		frappe.db.commit()
+	if not frappe.db.exists("HD Customer", doc.name):
+		hd_customer = frappe.new_doc("HD Customer")
+		hd_customer.customer_name = doc.name
+		hd_customer.insert()
+		frappe.db.commit()
