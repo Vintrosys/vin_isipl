@@ -167,10 +167,10 @@ doc_events = {
         "before_save": "vin_isipl.utils.custom_search.before_save"
     },
     "HD Ticket": {
-        "after_insert": "vin_isipl.events.whatsapp_message.on_ticket_created",
+        "after_insert": "vin_isipl.events.whatsapp_message.on_ticket_created",        
         "on_update": "vin_isipl.events.whatsapp_message.on_ticket_update",
-    }
-
+        "validate": "vin_isipl.utils.ticket_actions.validate"   
+    },    
 }
 # "Purchase Order": {
         # "validate": "vin_isipl.utils.purchase_order.on_validate"

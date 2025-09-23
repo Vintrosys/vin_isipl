@@ -41,6 +41,30 @@ def set_check_in(ticket):
     except Exception as e:
         frappe.log_error(frappe.get_traceback(), "CheckIn Error")
         frappe.throw("Failed to check in: " + str(e))
+
+def validate(doc, method):
+    if doc.status == "Pending" and not doc.custom_pending_reason:
+        frappe.throw("Please provide the Pending Reason")
+
+    if doc.status == "Resolved":
+        attachments = frappe.get_all(
+            "File",
+            filters={
+                "attached_to_doctype": doc.doctype,
+                "attached_to_name": doc.name
+            },
+            fields=["name"]
+        )
+
+        if not attachments:
+            frappe.throw("Please attach a Service Report in the comments section")
+
+    if not doc.is_new():
+        old_doc = doc.get_doc_before_save()
+        if old_doc and old_doc.status == "Resolved" and doc.status != "Resolved":
+            frappe.throw("Status cannot be changed once Resolved")
+    
+
     
 
 

@@ -112,10 +112,10 @@ frappe.ui.form.on('Quotation', {
 
     set_party_name: function (frm) {
         if (frm.doc.party_name) {
-            frappe.db.get_value('CRM Deal', { organization: frm.doc.party_name }, 'deal_owner')
+            frappe.db.get_value('CRM Deal', { organization: frm.doc.party_name }, 'custom_sales_person')
                 .then(r => {
-                    if (r.message && r.message.deal_owner) {
-                        fetch_sales_person(frm, r.message.deal_owner);
+                    if (r.message && r.message.custom_sales_person) {
+                        fetch_sales_person(frm, r.message.custom_sales_person);
                     } else {
                         if (!frm.doc.sales_person) {
                             frm.set_value('sales_person', '');
@@ -141,8 +141,8 @@ frappe.ui.form.on('Quotation', {
     }
 });
 
-function fetch_sales_person(frm, deal_owner) {    
-    frappe.db.get_value('Employee', { user_id: deal_owner }, 'name')
+function fetch_sales_person(frm, sales_person) {    
+    frappe.db.get_value('Employee', { user_id: sales_person }, 'name')
         .then(emp => {
             if (emp.message && emp.message.name) {               
                 frappe.db.get_value('Sales Person', { employee: emp.message.name }, 'name')
