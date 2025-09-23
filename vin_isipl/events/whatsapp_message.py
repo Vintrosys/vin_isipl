@@ -79,4 +79,5 @@ def on_ticket_update(doc, method):
             
     except Exception:
         frappe.log_error(title="WhyNoo Ticket Update Error", message=(frappe.get_traceback() or "") [:4000])
+        
 
