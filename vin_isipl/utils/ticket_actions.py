@@ -43,8 +43,12 @@ def set_check_in(ticket):
         frappe.throw("Failed to check in: " + str(e))
 
 def validate(doc, method):
+    old_doc = doc.get_doc_before_save()
     if doc.status == "Pending" and not doc.custom_pending_reason:
         frappe.throw("Please provide the Pending Reason")
+
+    if doc.custom_pending_reason and not old_doc.custom_pending_reason:
+        doc.status = "Pending"
 
     if doc.status == "Resolved":
         attachments = frappe.get_all(
@@ -59,12 +63,10 @@ def validate(doc, method):
         if not attachments:
             frappe.throw("Please attach a Service Report in the comments section")
 
-    if not doc.is_new():
-        old_doc = doc.get_doc_before_save()
+    if not doc.is_new():        
         if old_doc and old_doc.status == "Resolved" and doc.status != "Resolved":
             frappe.throw("Status cannot be changed once Resolved")
     
 
-    
 
 
