@@ -10,6 +10,7 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 		status_field = self._get_doc_status_field()
 		status = self.get(status_field)
 
+		# Notify the applicant when Approved/Rejected
 		if self.has_value_changed(status_field) and status in ["Approved", "Rejected"]:
 			from_user = frappe.session.user
 			from_user_name = self._get_user_name(from_user)
@@ -21,12 +22,21 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 			notification = frappe.new_doc("PWA Notification")
 			notification.from_user = from_user
 			notification.to_user = to_user
-
 			notification.message = f"{bold('Your')} {bold(self.doctype)} {self.name} has been {bold(status)} by {bold(from_user_name)}"
-
 			notification.reference_document_type = self.doctype
 			notification.reference_document_name = self.name
 			notification.insert(ignore_permissions=True)
+
+			# Notify the approver when Rejected
+			if status in ["Rejected"]:
+				to_user = self.leave_approver
+				notification = frappe.new_doc("PWA Notification")
+				notification.message = f"{self.employee_name}'s {self.doctype} {self.name} has been {bold(status)} by {bold(from_user_name)}"
+				notification.from_user = from_user
+				notification.to_user = to_user
+				notification.reference_document_type = self.doctype
+				notification.reference_document_name = self.name
+				notification.insert(ignore_permissions=True)
 
 		wf_state = self.workflow_state
 		leave_authorizer = frappe.db.get_value(
@@ -35,6 +45,7 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 			"approver",
 		)
 
+		# Notify the authorizer when Approved
 		if wf_state == "Approved":
 			from_user = self.leave_approver
 			to_user = leave_authorizer
@@ -48,7 +59,9 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 			notification.reference_document_name = self.name
 			notification.insert(ignore_permissions=True)
 
+		
 		if wf_state in ["Authorized"]:
+			# Notify the applicant when Authorized
 			from_user = leave_authorizer
 			from_user_name = self._get_user_name(from_user)
 			to_user = self._get_employee_user()
@@ -59,6 +72,17 @@ class CustomPWANotificationsMixin(PWANotificationsMixin):
 			notification.reference_document_type = self.doctype
 			notification.reference_document_name = self.name
 			notification.insert(ignore_permissions=True)
+
+			# Notify the approver when Authorized
+			to_user = self.leave_approver
+			notification = frappe.new_doc("PWA Notification")
+			notification.message = f"{self.employee_name}'s {self.doctype} {self.name} has been {bold(wf_state)} by {bold(from_user_name)}"
+			notification.from_user = from_user
+			notification.to_user = to_user
+			notification.reference_document_type = self.doctype
+			notification.reference_document_name = self.name
+			notification.insert(ignore_permissions=True)
+
 
 class CustomLeaveApplication(LeaveApplication, CustomPWANotificationsMixin):
 	pass
