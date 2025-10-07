@@ -1,6 +1,7 @@
 import frappe
 from frappe.utils import time_diff_in_hours, now_datetime
 from frappe import _
+from vin_isipl.events.whatsapp_message import send_checkin_notification
 
 @frappe.whitelist()
 def checkout_and_compute(ticket):
@@ -34,6 +35,7 @@ def set_check_in(ticket):
         doc.custom_check_in = now
         doc.save(ignore_permissions=True)
         frappe.db.commit()
+        send_checkin_notification(doc)
         return {
             "check_in": str(now)
         }
