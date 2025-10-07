@@ -38,6 +38,7 @@ def on_ticket_update(doc, method):
         previous_doc = doc.get_doc_before_save()
         if not previous_doc:
             return  
+        
         old_status = previous_doc.status
         old_reason = previous_doc.custom_pending_reason
 
@@ -81,3 +82,26 @@ def on_ticket_update(doc, method):
         frappe.log_error(title="WhyNoo Ticket Update Error", message=(frappe.get_traceback() or "") [:4000])
         
 
+def send_checkin_notification(ticket_doc):
+    """Send WhatsApp notification on Check-In"""
+    try:
+        
+        phone = ticket_doc.custom_mobile_number
+
+        if not phone:
+            frappe.log_error("No phone number found for Check-In in ticket {}".format(ticket_doc.name))
+            return
+
+        phone_with_code = "91" + str(phone)
+        checkin_template = frappe.get_single("Whynoo Settings").check_in
+        
+        send_whynoo_template(
+            phone_with_code,
+            checkin_template,
+            [ticket_doc.name]
+        )
+
+    except Exception:
+        frappe.log_error(
+            title="WhyNoo Check-In Notification Error", message=frappe.get_traceback()[:4000]
+        )
