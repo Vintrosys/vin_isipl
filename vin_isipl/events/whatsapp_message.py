@@ -92,7 +92,7 @@ def send_checkin_notification(ticket_doc):
             frappe.log_error("No phone number found for Check-In in ticket {}".format(ticket_doc.name))
             return
 
-        phone_with_code = "91" + str(phone)
+        phone_with_code = str(phone).replace("+","").replace("-","")
         checkin_template = frappe.get_single("Whynoo Settings").check_in
         
         send_whynoo_template(
