@@ -35,7 +35,7 @@ def set_check_in(ticket):
         doc.custom_check_in = now
         doc.save(ignore_permissions=True)
         frappe.db.commit()
-        send_checkin_notification(doc)
+        # send_checkin_notification(doc)
         return {
             "check_in": str(now)
         }
@@ -52,6 +52,8 @@ def validate(doc, method):
     if doc.custom_pending_reason and not old_doc.custom_pending_reason:
         doc.status = "Pending"
 
+    if doc.status == "Working":
+        send_checkin_notification(doc)
     if doc.status == "Resolved":
         attachments = frappe.get_all(
             "File",

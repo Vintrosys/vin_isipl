@@ -47,7 +47,7 @@ def on_ticket_update(doc, method):
         
         assigned_to = frappe.db.get_value(
             "ToDo",
-            {"reference_type": "HD Ticket", "reference_name": doc.name},
+            {"reference_type": "HD Ticket", "reference_name": doc.name, "status":"Open"},
             "allocated_to"
         )
 
