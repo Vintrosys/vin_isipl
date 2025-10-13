@@ -311,6 +311,7 @@ override_whitelisted_methods = {
 
 override_doctype_class = {
     "Leave Application": "vin_isipl.utils.pwa_notifications.CustomLeaveApplication",
+    "Expense Claim": "vin_isipl.utils.pwa_notifications.CustomExpenseClaim",
     "Sales Invoice": "vin_isipl.utils.sales_invoice.CustomSalesInvoice",
     "Payment Entry": "vin_isipl.utils.payment_entry.CustomPaymentEntry",
 }
