@@ -2,7 +2,7 @@
 # Patches added in this section will be executed before doctypes are migrated
 # Read docs to understand patches: https://frappeframework.com/docs/v14/user/en/database-migrations
 vin_isipl.patches.rename_custom_field
-execute:frappe.db.sql("ALTER SEQUENCE hd_ticket_id_seq RESTART WITH 5036;") #10-10-2025
+execute:frappe.db.sql("ALTER SEQUENCE hd_ticket_id_seq RESTART WITH 5035;") #15-10-2025
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
 vin_isipl.patches.company_custom_fields #26-02-2025
