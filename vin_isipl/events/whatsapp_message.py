@@ -35,7 +35,6 @@ def on_ticket_update(doc, method):
     Ticket is Resolved
     """
     try:
-
         previous_doc = doc.get_doc_before_save()
         if not previous_doc:
             return  
@@ -43,28 +42,15 @@ def on_ticket_update(doc, method):
         old_status = previous_doc.status
         old_reason = previous_doc.custom_pending_reason
 
-        if old_status == doc.status and old_reason == doc.custom_pending_reason:
-            return
-        
-        assigned_to = frappe.db.get_value(
-            "ToDo",
-            {"reference_type": "HD Ticket", "reference_name": doc.name, "status":"Open"},
-            "allocated_to"
-        )
-
-        agent_name = frappe.db.get_value("User", assigned_to, "full_name") or assigned_to
-
         phone = doc.custom_mobile_number
 
-        if not phone:
-            frappe.log_error(message="No phone number provided for ticket {}".format(doc.name), title="Phone Number Unavailable")
-            return
+        if not phone.isdigit() or not len(phone) ==10:
+            frappe.throw("Please Enter Correct Contact No")
 
         phone_with_code = "91"+str(phone)
         resolved_template = frappe.get_single("Whynoo Settings").ticket_resolved
         pending_template = frappe.get_single("Whynoo Settings").ticket_pending
         creation_template = frappe.db.get_single_value("Whynoo Settings", "ticket_creation")
-        
         if previous_doc.custom_mobile_number != phone:
             send_whynoo_template(
                 phone_with_code,
@@ -79,6 +65,12 @@ def on_ticket_update(doc, method):
             )
                     
         elif doc.status == "Pending" and doc.custom_pending_reason:
+            if old_status == doc.status and old_reason == doc.custom_pending_reason:
+                return
+            assigned_to = frappe.db.get_value("ToDo",
+             {"reference_type": "HD Ticket", "reference_name": doc.name, "status":"Open"},"allocated_to")
+            agent_name = frappe.db.get_value("User", assigned_to, "full_name") or assigned_to
+
             reason = frappe.db.get_value("HD Ticket Pending Reason", doc.custom_pending_reason, "pending_reason")
             send_whynoo_template(
                 phone_with_code,
