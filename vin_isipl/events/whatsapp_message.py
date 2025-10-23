@@ -60,7 +60,7 @@ def on_ticket_update(doc, method):
             frappe.log_error(message="No phone number provided for ticket {}".format(doc.name), title="Phone Number Unavailable")
             return
 
-        phone_with_code = str(phone).replace("+","").replace("-","")
+        phone_with_code = "91"+str(phone)
         resolved_template = frappe.get_single("Whynoo Settings").ticket_resolved
         pending_template = frappe.get_single("Whynoo Settings").ticket_pending
         creation_template = frappe.db.get_single_value("Whynoo Settings", "ticket_creation")
