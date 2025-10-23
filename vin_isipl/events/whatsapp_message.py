@@ -30,6 +30,7 @@ def on_ticket_created(doc, method):
 def on_ticket_update(doc, method):
     """
     Send Whatsapp Notification when 
+    Ticket is Open
     Ticket is Pending
     Ticket is Resolved
     """
@@ -62,7 +63,14 @@ def on_ticket_update(doc, method):
         phone_with_code = str(phone).replace("+","").replace("-","")
         resolved_template = frappe.get_single("Whynoo Settings").ticket_resolved
         pending_template = frappe.get_single("Whynoo Settings").ticket_pending
-            
+        creation_template = frappe.db.get_single_value("Whynoo Settings", "ticket_creation")
+        
+        if previous_doc.custom_mobile_number != phone:
+            send_whynoo_template(
+                phone_with_code,
+                creation_template,  
+                [doc.name]
+            )    
         if doc.status == "Resolved":
             send_whynoo_template(
                 phone_with_code,
