@@ -46,18 +46,11 @@ def set_check_in(ticket):
 
 def validate(doc, method):
     old_doc = doc.get_doc_before_save()
-    if not old_doc:
-        return
-    if old_doc.status == doc.status:
-        return
     if doc.status == "Pending" and not doc.custom_pending_reason:
         frappe.throw("Please provide the Pending Reason")
 
     if doc.custom_pending_reason and not old_doc.custom_pending_reason:
         doc.status = "Pending"
-
-    if doc.status == "Working":
-        send_checkin_notification(doc)
     if doc.status == "Resolved":
         attachments = frappe.get_all(
             "File",

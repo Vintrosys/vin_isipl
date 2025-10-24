@@ -57,6 +57,9 @@ def on_ticket_update(doc, method):
                 creation_template,  
                 [doc.name]
             )    
+        if doc.status == "Working":
+            send_checkin_notification(doc)
+
         if doc.status == "Resolved":
             send_whynoo_template(
                 phone_with_code,
