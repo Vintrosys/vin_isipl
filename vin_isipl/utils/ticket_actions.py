@@ -46,7 +46,9 @@ def set_check_in(ticket):
 
 def validate(doc, method):
     old_doc = doc.get_doc_before_save()
-    if not old_doc.status and old_doc.status == doc.status:
+    if not old_doc:
+        return
+    if old_doc.status == doc.status:
         return
     if doc.status == "Pending" and not doc.custom_pending_reason:
         frappe.throw("Please provide the Pending Reason")
