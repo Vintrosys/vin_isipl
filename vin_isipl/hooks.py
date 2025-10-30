@@ -301,7 +301,11 @@ fixtures = [
 ]
 
 
-app_include_js = "/assets/vin_isipl/js/override_update_child_items.js"
+app_include_js = [
+    "/assets/vin_isipl/js/override_update_child_items.js",
+    "/assets/vin_isipl/js/hd_ticket_list.js"
+]
+
 
 override_whitelisted_methods = {
     "erpnext.controllers.accounts_controller.update_child_qty_rate": "vin_isipl.utils.accounts_controller.update_child_qty_rate",
