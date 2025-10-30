@@ -297,8 +297,9 @@ doctype_list_js = {
 #     {"dt": "Insights Dashboard v3"},
     
 fixtures = [
-    {"dt": "DocType", "filters": [["name", "in", ["PI Version Tracker"]]]}
+    {"dt": "Server Script"}
 ]
+
 
 app_include_js = "/assets/vin_isipl/js/override_update_child_items.js"
 

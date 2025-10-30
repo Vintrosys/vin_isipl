@@ -66,13 +66,13 @@
   "doctype_event": "After Insert",
   "enable_rate_limit": 0,
   "event_frequency": "All",
-  "modified": "2025-10-28 11:59:04.224717",
+  "modified": "2025-10-30 18:38:42.818699",
   "module": "Vin Isipl",
   "name": "Hd Customer Creation",
   "rate_limit_count": 5,
   "rate_limit_seconds": 86400,
   "reference_doctype": "Customer",
-  "script": "frappe.get_doc(dict(doctype = 'HD Customer',customer_name = doc.customer_name)).insert()",
+  "script": "if not frappe.db.get_value(\"HD Customer\", doc.customer_name):\n    frappe.get_doc(dict(doctype = 'HD Customer',customer_name = doc.customer_name)).insert()",
   "script_type": "DocType Event"
  }
 ]

@@ -22,4 +22,8 @@ def execute():
         clean = sanitize(supplier.supplier_name)
         frappe.db.set_value("Supplier", supplier.name, "custom_search_key", clean)
 
+    hd_customers = frappe.get_all("HD Customer", fields=["name", "customer_name"])
+    for hd_customer in hd_customers:
+        clean = sanitize(hd_customer.customer_name)
+        frappe.db.set_value("HD Customer", hd_customer.name, "custom_search_key", clean)
     frappe.db.commit()

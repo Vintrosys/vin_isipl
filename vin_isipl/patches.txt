@@ -6,5 +6,5 @@ execute:frappe.db.sql("ALTER SEQUENCE hd_ticket_id_seq RESTART WITH 5120;") #16-
 [post_model_sync]
 # Patches added in this section will be executed after doctypes are migrated
 vin_isipl.patches.company_custom_fields #26-02-2025
-vin_isipl.patches.custom_search_key_field
-vin_isipl.patches.generate_search_keys
+vin_isipl.patches.custom_search_key_field #30-10-2025 
+vin_isipl.patches.generate_search_keys #30-10-2025

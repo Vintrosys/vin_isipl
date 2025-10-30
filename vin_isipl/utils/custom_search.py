@@ -9,7 +9,8 @@ build_for_autosuggest = frappe.desk.search.build_for_autosuggest
 search_fields_map = {
     "Item": ["name", "item_name", "item_group"],
     "Customer": ["name", "customer_name", "customer_group"],
-    "Supplier": ["name", "supplier_name", "supplier_group"]
+    "Supplier": ["name", "supplier_name", "supplier_group"],
+    "HD Customer": ["name", "customer_name"]
 }
 
 
@@ -78,5 +79,4 @@ def custom_search_link(
 
 
     return build_for_autosuggest(results, doctype=doctype)
-
 

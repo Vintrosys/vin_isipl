@@ -19,6 +19,12 @@ def execute():
             "fieldname": "custom_search_key",
             "label": "Search Key",
             "insert_after": "supplier_name"
+        },
+        {
+            "dt": "HD Customer",
+            "fieldname": "custom_search_key",
+            "label": "Search Key",
+            "insert_after": "customer_name"
         }
     ]
 
