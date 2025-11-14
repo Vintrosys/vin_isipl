@@ -169,7 +169,11 @@ doc_events = {
     "HD Ticket": {        
         "on_update": "vin_isipl.events.whatsapp_message.on_ticket_update",
         "validate": "vin_isipl.utils.ticket_actions.validate"   
-    },    
+    },  
+    "Comment": {
+        "on_update": "vin_isipl.utils.hd_ticket_comment.on_comment_update",
+    }
+
 }
 # "Purchase Order": {
         # "validate": "vin_isipl.utils.purchase_order.on_validate"
