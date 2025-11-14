@@ -47,7 +47,7 @@
   "doctype_event": "After Insert",
   "enable_rate_limit": 0,
   "event_frequency": "All",
-  "modified": "2025-11-14 19:38:39.857815",
+  "modified": "2025-11-14 19:44:34.214967",
   "module": "Vin Isipl",
   "name": "HD Ticket Comment",
   "rate_limit_count": 5,
