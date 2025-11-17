@@ -9,13 +9,13 @@
   "doctype_event": "Before Insert",
   "enable_rate_limit": 0,
   "event_frequency": "All",
-  "modified": "2025-11-14 19:27:53.769359",
+  "modified": "2025-11-17 13:08:48.918373",
   "module": "Vin Isipl",
   "name": "ISIPL HD Ticket Customization",
   "rate_limit_count": 5,
   "rate_limit_seconds": 86400,
   "reference_doctype": "HD Ticket",
-  "script": "if doc.custom_machine_problem:\n    doc.subject = f'{doc.custom_machine_problem} - {doc.ticket_type}'\nelse:\n     doc.subject = f'{doc.custom_others} - {doc.ticket_type}'",
+  "script": "# Set subject based on machine problem or others\nif doc.custom_machine_problem:\n    doc.subject = f\"{doc.custom_machine_problem} - {doc.ticket_type}\"\nelse:\n    doc.subject = f\"{doc.custom_others} - {doc.ticket_type}\"\n\n# Set custom_created_date from creation (Created On)\nif not doc.custom_created_date:\n    doc.custom_created_date = doc.creation\n",
   "script_type": "DocType Event"
  },
  {
