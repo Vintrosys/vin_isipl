@@ -1,5 +1,6 @@
 import frappe
 from vin_isipl.events.whatsapp import send_whynoo_template
+from frappe import _
 
 
 def on_ticket_update(doc, method):
@@ -9,14 +10,15 @@ def on_ticket_update(doc, method):
     Ticket is Resolved
     """
     try:
-        summary = []
-        for row in doc.custom_machine_type_list:
-            line = f"{row.machine_type}"
-            summary.append(line)
+        if doc.custom_machine_type_list:
+            summary = []
+            for row in doc.custom_machine_type_list:
+                line = f"{row.machine_type}"
+                summary.append(line)
 
-        # Save output
-        if summary:
-            doc.custom_machine_details = ", ".join(summary)
+            # Save output
+            if summary:
+                doc.custom_machine_details = ", ".join(summary)
 
         previous_doc = doc.get_doc_before_save()
         if not previous_doc:
@@ -25,7 +27,7 @@ def on_ticket_update(doc, method):
         phone = doc.custom_mobile_number
 
         if not phone.isdigit() or not len(phone) ==10:
-            frappe.throw("Please Enter Correct Contact No")
+            frappe.throw(_("Please Enter Correct Contact No"))
 
         phone_with_code = "91"+str(phone)
         resolved_template = frappe.get_single("Whynoo Settings").ticket_resolved
