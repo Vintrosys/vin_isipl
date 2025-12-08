@@ -17,9 +17,9 @@ search_fields_map = {
 def sanitize(s):
     return re.sub(r'[^a-zA-Z0-9]', '', (s or '')).lower()
 
-# Currently search optimization done only for Item, Customer, Supplier
+# Currently search optimization done only for Item, Customer, Supplier, HD Customer
 def before_save(doc, method):
-    for field in ["item_code", "customer_name", "supplier_name"]:
+    for field in ["item_code", "customer_name", "supplier_name","customer_name"]:
         if hasattr(doc, field):
             value = getattr(doc, field)
             if value:

@@ -166,6 +166,9 @@ doc_events = {
     "Supplier": {
         "before_save": "vin_isipl.utils.custom_search.before_save"
     },
+    "HD Customer": {
+        "before_save": "vin_isipl.utils.custom_search.before_save"
+    },
     "HD Ticket": {        
         "validate": "vin_isipl.events.whatsapp_message.on_ticket_update" 
     },  

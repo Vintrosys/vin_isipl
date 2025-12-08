@@ -8,5 +8,5 @@ vin_isipl.patches.crm_comment_sync #31-11-2025
 # Patches added in this section will be executed after doctypes are migrated
 vin_isipl.patches.company_custom_fields #26-02-2025
 vin_isipl.patches.custom_search_key_field #30-10-2025 
-vin_isipl.patches.generate_search_keys #30-10-2025
+vin_isipl.patches.generate_search_keys #31-10-2025
 vin_isipl.patches.hd_ticket_update #17-11-2025
