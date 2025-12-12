@@ -174,6 +174,7 @@ doc_events = {
     },  
     "Comment": {
         "on_update": "vin_isipl.utils.hd_ticket_comment.on_comment_update",
+        "on_trash": "vin_isipl.utils.hd_ticket_comment.delete_hd_comment"
     }
 
 }
