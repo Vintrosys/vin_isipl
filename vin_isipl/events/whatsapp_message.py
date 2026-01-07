@@ -52,3 +52,17 @@ def on_ticket_update(doc, method):
             
     except Exception:
         frappe.log_error(title="WhyNoo Ticket Update Error", message=(frappe.get_traceback() or "") [:4000])
+
+def ticket_assigned_notify(doc,method):
+    try:
+        if doc.reference_type == "HD Ticket":
+            mobile_no = frappe.db.get_value("User",doc.allocated_to,"mobile_no")
+            customer_name = frappe.db.get_value("HD Ticket",doc.reference_name,"customer")
+            phone_with_code = "91"+str(mobile_no)
+            send_whynoo_template(
+                    phone_with_code,
+                    "ticket_assigned",   
+                    [doc.reference_name, customer_name,frappe.conf.get("support_url")+"helpdesk/tickets/"+doc.reference_name]   
+                )
+    except Exception:
+        frappe.log_error(title="WhyNoo Ticket Update Error", message=(frappe.get_traceback() or "") [:4000])
