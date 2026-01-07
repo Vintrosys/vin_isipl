@@ -62,7 +62,7 @@ def ticket_assigned_notify(doc,method):
             send_whynoo_template(
                     phone_with_code,
                     "ticket_assigned",   
-                    [doc.reference_name, customer_name,frappe.conf.get("support_url")+"helpdesk/tickets/"+doc.reference_name]   
+                    [doc.reference_name, customer_name,frappe.conf.get("support_url")+"helpdesk/tickets/"+f"{doc.reference_name}"]   
                 )
     except Exception:
         frappe.log_error(title="WhyNoo Ticket Update Error", message=(frappe.get_traceback() or "") [:4000])
