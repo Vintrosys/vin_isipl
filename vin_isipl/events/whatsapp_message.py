@@ -49,6 +49,14 @@ def on_ticket_update(doc, method):
                 resolved_template,   
                 [doc.name, agent_name]   
             )
+            if doc.status == "Pending":
+                if previous_doc.custom_machine_problem != doc.custom_machine_problem: 
+                    if doc.custom_machine_problem == "SPARES REQUIRED":
+                        user = frappe.conf.get("spare_admin")
+                        mobile_no = frappe.db.get_value("User",user,"mobile_no")
+                        phone_with_code = "91"+str(mobile_no)
+                        send_whynoo_template(phone_with_code,"spares_required_alert",
+                            [doc.customer,frappe.conf.get("support_url")+"helpdesk/tickets/"+f"{doc.reference_name}"])
             
     except Exception:
         frappe.log_error(title="WhyNoo Ticket Update Error", message=(frappe.get_traceback() or "") [:4000])
