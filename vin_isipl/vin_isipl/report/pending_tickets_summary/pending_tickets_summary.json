@@ -1,0 +1,35 @@
+{
+ "add_total_row": 0,
+ "add_translate_data": 0,
+ "columns": [],
+ "creation": "2026-01-16 17:39:30.042829",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": null,
+ "modified": "2026-01-17 11:56:08.797074",
+ "modified_by": "Administrator",
+ "module": "Vin Isipl",
+ "name": "Pending Tickets Summary",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "SELECT\n    CASE\n        WHEN EXISTS (\n            SELECT 1\n            FROM `tabHD Agent` a2\n            WHERE JSON_CONTAINS(t._assign, JSON_QUOTE(a2.user))\n              AND a2.user != t.custom_team_lead\n        )\n        THEN (\n            SELECT a3.agent_name\n            FROM `tabHD Agent` a3\n            WHERE JSON_CONTAINS(t._assign, JSON_QUOTE(a3.user))\n              AND a3.user != t.custom_team_lead\n            ORDER BY a3.agent_name\n            LIMIT 1\n        )\n\n        WHEN JSON_CONTAINS(t._assign, JSON_QUOTE(t.custom_team_lead))\n             AND JSON_LENGTH(t._assign) = 1\n        THEN u.full_name\n\n        ELSE 'Unassigned'\n    END AS Technician,\n\n    t.name AS `Ticket ID`,\n    r.pending_reason AS Reason,\n    t.customer AS Customer,\n    t.team AS Team,\n    t.custom_created_date AS `Date`,\n    DATEDIFF(CURDATE(), DATE(t.creation)) AS `Pending Days`\n\nFROM `tabHD Ticket` t\n\nLEFT JOIN `tabUser` u\n    ON u.name = t.custom_team_lead\n\nLEFT JOIN `tabHD Ticket Pending Reason` r\n    ON r.name = t.custom_pending_reason\n\nWHERE\n    t.status = 'Pending'\n\n    -- \ud83d\udcc5 Date filters\n    AND (\n        %(from_date)s IS NULL\n        OR t.custom_created_date >= %(from_date)s\n    )\n    AND (\n        %(to_date)s IS NULL\n        OR t.custom_created_date <= %(to_date)s\n    )\n\n    -- \ud83d\udc65 Team filter (HD Team)\n    AND (\n        %(team)s IS NULL\n        OR t.team = %(team)s\n    )\n\n    -- \ud83d\udc64 Agent filter (HD Agent via assignment JSON)\n    AND (\n        %(agent)s IS NULL\n        OR EXISTS (\n            SELECT 1\n            FROM `tabHD Agent` a\n            WHERE a.name = %(agent)s\n              AND JSON_CONTAINS(t._assign, JSON_QUOTE(a.user))\n        )\n    )\n\nORDER BY t.name;\n",
+ "ref_doctype": "HD Ticket",
+ "report_name": "Pending Tickets Summary",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Agent Manager"
+  },
+  {
+   "role": "System Manager"
+  },
+  {
+   "role": "All"
+  }
+ ],
+ "timeout": 0
+}
