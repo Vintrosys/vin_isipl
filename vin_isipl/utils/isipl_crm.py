@@ -3,7 +3,7 @@ from frappe import _
 from frappe.utils import  get_url_to_list, get_url_to_form
 
 @frappe.whitelist()
-def get_quotation_url(crm_deal, organization):
+def get_quotation_url(crm_deal, organization,sales_person):
 	erpnext_crm_settings = frappe.get_single("ERPNext CRM Settings")
 	if not erpnext_crm_settings.enabled:
 		frappe.throw(_("ERPNext is not integrated with the CRM"))
@@ -19,7 +19,7 @@ def get_quotation_url(crm_deal, organization):
 			customer = org
 	if not erpnext_crm_settings.is_erpnext_in_different_site:
 		quotation_url = get_url_to_list("Quotation")
-		return f"{quotation_url}/new?quotation_to=Customer&party_name={customer}&crm_deal={crm_deal}&company={erpnext_crm_settings.erpnext_company}"
+		return f"{quotation_url}/new?quotation_to=Customer&party_name={customer}&crm_deal={crm_deal}&company={erpnext_crm_settings.erpnext_company}&sales_person={sales_person}"
     
 @frappe.whitelist()
 def get_customer_link(crm_deal):
@@ -37,6 +37,9 @@ def get_customer_link(crm_deal):
 				if customer:
 					break
 		if not customer:
+			doc = frappe.new_doc("Customer")
+			doc.customer_name = org
+			doc.insert()
 			customer = org
 		return get_url_to_form("Customer", customer) if customer else ""
 	
