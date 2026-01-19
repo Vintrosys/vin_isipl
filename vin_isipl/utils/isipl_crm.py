@@ -16,9 +16,6 @@ def get_quotation_url(crm_deal, organization):
 				if customer:
 					break
 	if not customer:
-			doc = frappe.new_doc("Customer")
-			doc.customer_name = org
-			doc.insert()
 			customer = org
 	if not erpnext_crm_settings.is_erpnext_in_different_site:
 		quotation_url = get_url_to_list("Quotation")
@@ -43,9 +40,6 @@ def get_customer_link(crm_deal):
 				if customer:
 					break
 		if not customer:
-			doc = frappe.new_doc("Customer")
-			doc.customer_name = org
-			doc.insert()
 			customer = org
 		return get_url_to_form("Customer", customer) if customer else ""
 	
