@@ -10,12 +10,12 @@ def warn_msg(doc,method):
     if doc.status == "Pending":
         if not doc.custom_pending_reason:
             frappe.throw(_("Please Specify Pending Reason"))
-    if doc.status == "Working":
-        tickets = frappe.get_list("HD Ticket",{"status":"Working"})
-        for ticket in tickets:
-            if not ticket['name'] == doc.name:
-                if frappe.db.get_value("ToDo",{"allocated_to":frappe.session.user,"reference_type":"HD Ticket","reference_name":ticket['name']}):
-                    frappe.throw(_("Kindly Close other Live Tickets"))
+    # if doc.status == "Working":
+    #     tickets = frappe.get_list("HD Ticket",{"status":"Working"})
+    #     for ticket in tickets:
+    #         if not ticket['name'] == doc.name:
+    #             if frappe.db.get_value("ToDo",{"allocated_to":frappe.session.user,"reference_type":"HD Ticket","reference_name":ticket['name'],"status":"Open"}):
+    #                 frappe.throw(_("Kindly Close other Live Tickets"))
     
 
 def on_ticket_update(doc, method):
