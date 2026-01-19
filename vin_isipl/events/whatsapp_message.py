@@ -4,9 +4,10 @@ from frappe import _
 
 def warn_msg(doc,method):
     previous_doc = doc.get_doc_before_save()
-    if previous_doc.status != "Open":
-        if doc.status == "Open":
-            frappe.throw(_("Action Restricted"))
+    if previous_doc:
+        if previous_doc.status != "Open":
+            if doc.status == "Open":
+                frappe.throw(_("Action Restricted"))
     if doc.status == "Pending":
         if not doc.custom_pending_reason:
             frappe.throw(_("Please Specify Pending Reason"))
