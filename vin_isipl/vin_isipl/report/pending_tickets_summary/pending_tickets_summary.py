@@ -58,7 +58,7 @@ def execute(filters=None):
     columns = get_columns()
     data = []
 
-    conditions = ["t.status IN ('Pending', 'Testing', 'Claimed')"]
+    conditions = ["t.status IN ('Pending', 'Testing', 'Claim')"]
     values = {}
 
     # 📅 Date filters
