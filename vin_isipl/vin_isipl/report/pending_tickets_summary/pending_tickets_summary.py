@@ -55,27 +55,30 @@ def get_columns():
 
 
 def execute(filters=None):
+    filters = filters or {}
+
     columns = get_columns()
     data = []
 
-    conditions = ["t.status = 'Pending'"]
+    # ✅ FIXED: include multiple statuses
+    conditions = ["t.status IN ('Pending', 'Testing', 'Claimed')"]
     values = {}
 
     # 📅 Date filters
     if filters.get("from_date"):
-        conditions.append("t.custom_created_date >= %(from_date)s")
+        conditions.append("t.creation >= %(from_date)s")
         values["from_date"] = filters["from_date"]
 
     if filters.get("to_date"):
-        conditions.append("t.custom_created_date <= %(to_date)s")
+        conditions.append("t.creation <= %(to_date)s")
         values["to_date"] = filters["to_date"]
 
     # 👥 Team filter
     if filters.get("team"):
-        conditions.append("t.agent_group = %(team)s")
+        conditions.append("t.team = %(team)s")
         values["team"] = filters["team"]
 
-    # 👤 Agent filter
+    # 👤 Agent filter (safe – only applies when selected)
     if filters.get("agent"):
         conditions.append("""
             EXISTS (
@@ -92,7 +95,6 @@ def execute(filters=None):
             t.name AS ticket_id,
             t.customer,
             t.agent_group,
-            t.custom_created_date,
             t.creation,
             r.pending_reason,
             t.custom_team_lead,
@@ -138,7 +140,7 @@ def execute(filters=None):
             "reason": t.pending_reason,
             "customer": t.customer,
             "team": t.agent_group,
-            "date": t.custom_created_date,
+            "date": t.creation,
             "pending_days": pending_days,
         })
 

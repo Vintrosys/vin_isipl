@@ -21,13 +21,6 @@ frappe.query_reports["Pending Tickets Summary"] = {
             fieldtype: "Link",
             options: "HD Team",
             width: 120
-        },
-        {
-            fieldname: "agent",
-            label: __("Agent"),
-            fieldtype: "Link",
-            options: "HD Agent",
-            width: 120
         }
 	]
 };
