@@ -181,6 +181,44 @@ frappe.ui.form.on('Quotation', {
     // },
 
     // -------------------------------
+            // IMPORTANT: re-apply filter + clear old term
+            frm.trigger('set_tc_query');
+            frm.set_value('tc_name', '');
+
+            frm.trigger('set_terms');
+
+        }, 300);
+
+        frm.trigger('party_name');
+    },
+
+    // -------------------------------
+    // COMPANY
+    // -------------------------------
+    // company: function (frm) {
+
+    //     if (frm.doc.company === "ISIPL") {
+    //         frm.set_value('naming_series', 'ISIPL-TPR-.FY.####');
+    //         frm.set_value('tc_name', '');
+    //         frm.set_value('custom_isipl_bank_account', '');
+    //         frm.set_value('payment_terms_template', '');
+    //         frm.set_value('custom_shipping_term', '');
+
+    //     } else if (frm.doc.company === "INNOVATIVE") {
+    //         frm.set_value('naming_series', 'INN-TPR-.FY.####');
+    //         frm.set_value('custom_isipl_bank_account', 'Innovative - IndusInd Bank');
+    //         frm.set_value('payment_terms_template', 'Immediate');
+    //         frm.set_value('custom_shipping_term', 'Ex - Works Tirupur');
+
+    //         if (frm.doc.order_type === "Service PI") {
+    //             frm.set_value('tc_name', 'Terms and Conditions - SERVICE AMC');
+    //         } else {
+    //             frm.set_value('tc_name', 'Terms and Conditions - STANDARD');
+    //         }
+    //     }
+    // },
+
+    // -------------------------------
     // SET TERMS DEFAULT
     // -------------------------------
     // set_terms: function (frm) {
