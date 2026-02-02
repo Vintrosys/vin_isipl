@@ -333,3 +333,17 @@ override_doctype_class = {
 
 
 
+fixtures = [
+    {
+        "doctype": "Custom Field",
+        "filters": [
+            ["dt", "in", ["HD Ticket"]]
+        ]
+    },
+    {
+        "doctype": "Server Script",
+        "filters": [
+            ["reference_doctype", "=", "HD Ticket"]
+        ]
+    }
+]
