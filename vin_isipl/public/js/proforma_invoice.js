@@ -29,6 +29,18 @@ frappe.ui.form.on('Quotation', {
         });
     },
 
+    // FILTER SHIPPING TERM
+
+    set_shipping_term_query: function (frm) {
+        frm.set_query("custom_shipping_term", function () {
+            return {
+                filters: {
+                    custom_pre_sales_type: frm.doc.order_type
+                }
+            };
+        });
+    },
+
     // -------------------------------
     // REFRESH
     // -------------------------------
@@ -38,6 +50,8 @@ frappe.ui.form.on('Quotation', {
         frm.trigger('set_tc_query');
 
         frm.trigger('set_payment_terms_query');
+
+        frm.trigger('set_shipping_term_query');
         
         setTimeout(() => {
             $(frm.page.wrapper)
@@ -128,10 +142,12 @@ frappe.ui.form.on('Quotation', {
              // re-apply filters
             frm.trigger('set_tc_query');
             frm.trigger('set_payment_terms_query');
+            frm.trigger('set_shipping_term_query');
 
             // clear old values to avoid mismatch
             frm.set_value('tc_name', '');
             frm.set_value('payment_terms_template', '');
+            frm.set_value('custom_shipping_term', '');
 
         }, 300);
 
