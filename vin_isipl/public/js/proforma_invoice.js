@@ -17,6 +17,18 @@ frappe.ui.form.on('Quotation', {
         });
     },
 
+    // FILTER PAYMENT TERMS TEMPLATE
+
+    set_payment_terms_query: function (frm) {
+        frm.set_query("payment_terms_template", function () {
+            return {
+                filters: {
+                    custom_pre_sales_type: frm.doc.order_type
+                }
+            };
+        });
+    },
+
     // -------------------------------
     // REFRESH
     // -------------------------------
@@ -25,6 +37,8 @@ frappe.ui.form.on('Quotation', {
         // apply terms filter on load
         frm.trigger('set_tc_query');
 
+        frm.trigger('set_payment_terms_query');
+        
         setTimeout(() => {
             $(frm.page.wrapper)
                 .find('.btn:contains("Get Items From")')
@@ -111,11 +125,13 @@ frappe.ui.form.on('Quotation', {
                 frm.set_df_property('tc_name', 'hidden', 0);
             }
 
-            // IMPORTANT: re-apply filter + clear old term
+             // re-apply filters
             frm.trigger('set_tc_query');
-            frm.set_value('tc_name', '');
+            frm.trigger('set_payment_terms_query');
 
-            frm.trigger('set_terms');
+            // clear old values to avoid mismatch
+            frm.set_value('tc_name', '');
+            frm.set_value('payment_terms_template', '');
 
         }, 300);
 
