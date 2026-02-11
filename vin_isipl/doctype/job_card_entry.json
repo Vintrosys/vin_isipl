@@ -1,0 +1,284 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-02-04 15:52:19.331175",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_trkg",
+  "job_card_number",
+  "job_card_date",
+  "company_name",
+  "column_break_syxw",
+  "machine_model_no",
+  "machine_serial_no",
+  "machine_received_date_and_time",
+  "machine_received_by",
+  "machine_and_parts_details_tab",
+  "machine_problem_description_section",
+  "machine_problem_description",
+  "part_details_tab",
+  "parts_used_section",
+  "parts_used",
+  "amended_from",
+  "service_details_tab",
+  "service_details_section",
+  "status_of_machine_at_present",
+  "details_of_work_done",
+  "charges_and_completion_section",
+  "labour_charges",
+  "problem_completed",
+  "sign_off_tab",
+  "sign_off_section",
+  "assurance_given_if_any",
+  "column_break_jups",
+  "completed_by",
+  "completed_date",
+  "completed_time",
+  "column_break_aydv",
+  "delivered_by",
+  "delivery_date",
+  "delivery_time",
+  "authorised_by",
+  "customer_signature"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_trkg",
+   "fieldtype": "Section Break",
+   "label": "JOB CARD DETAILS"
+  },
+  {
+   "fieldname": "job_card_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Job Card Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "job_card_number",
+   "fieldtype": "Data",
+   "label": "Job Card Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company_name",
+   "fieldtype": "Link",
+   "label": "Company Name",
+   "options": "Company",
+   "reqd": 1
+  },
+  {
+   "fieldname": "machine_model_no",
+   "fieldtype": "Data",
+   "label": "Machine Model No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "machine_serial_no",
+   "fieldtype": "Data",
+   "label": "Machine Serial No",
+   "reqd": 1
+  },
+  {
+   "fieldname": "machine_received_date_and_time",
+   "fieldtype": "Datetime",
+   "label": "Machine Received Date and Time"
+  },
+  {
+   "fieldname": "machine_received_by",
+   "fieldtype": "Link",
+   "label": "Machine Received By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "machine_problem_description_section",
+   "fieldtype": "Section Break",
+   "label": "MACHINE PROBLEM DESCRIPTION"
+  },
+  {
+   "fieldname": "machine_problem_description",
+   "fieldtype": "Long Text",
+   "label": "Machine Problem Description",
+   "reqd": 1
+  },
+  {
+   "fieldname": "parts_used_section",
+   "fieldtype": "Section Break",
+   "label": "PARTS USED"
+  },
+  {
+   "fieldname": "parts_used",
+   "fieldtype": "Table",
+   "label": "Parts Used",
+   "options": "Job Card Parts"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Job Card Entry",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "service_details_section",
+   "fieldtype": "Section Break",
+   "label": "SERVICE DETAILS"
+  },
+  {
+   "fieldname": "status_of_machine_at_present",
+   "fieldtype": "Small Text",
+   "label": "Status of Machine at Present",
+   "reqd": 1
+  },
+  {
+   "fieldname": "details_of_work_done",
+   "fieldtype": "Small Text",
+   "label": "Details of Work Done",
+   "reqd": 1
+  },
+  {
+   "fieldname": "charges_and_completion_section",
+   "fieldtype": "Section Break",
+   "label": "CHARGES AND COMPLETION"
+  },
+  {
+   "fieldname": "labour_charges",
+   "fieldtype": "Currency",
+   "label": "Labour Charges",
+   "reqd": 1
+  },
+  {
+   "fieldname": "problem_completed",
+   "fieldtype": "Select",
+   "label": "Problem Completed",
+   "options": "Full\nPartial",
+   "reqd": 1
+  },
+  {
+   "fieldname": "sign_off_section",
+   "fieldtype": "Section Break",
+   "label": "SIGN OFF"
+  },
+  {
+   "fieldname": "assurance_given_if_any",
+   "fieldtype": "Long Text",
+   "label": "Assurance Given (If Any)"
+  },
+  {
+   "fieldname": "completed_by",
+   "fieldtype": "Link",
+   "label": "Completed By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "completed_date",
+   "fieldtype": "Date",
+   "label": "Completed Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "completed_time",
+   "fieldtype": "Time",
+   "label": "Completed Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivered_by",
+   "fieldtype": "Link",
+   "label": "Delivered By",
+   "options": "User",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_date",
+   "fieldtype": "Date",
+   "label": "Delivery Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "delivery_time",
+   "fieldtype": "Time",
+   "label": "Delivery Time",
+   "reqd": 1
+  },
+  {
+   "fieldname": "authorised_by",
+   "fieldtype": "Data",
+   "label": "Authorised By",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_signature",
+   "fieldtype": "Signature",
+   "label": "Customer Signature",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_syxw",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_jups",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_aydv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "machine_and_parts_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Machine Details"
+  },
+  {
+   "fieldname": "part_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Part Details"
+  },
+  {
+   "fieldname": "sign_off_tab",
+   "fieldtype": "Tab Break",
+   "label": "Sign Off"
+  },
+  {
+   "fieldname": "service_details_tab",
+   "fieldtype": "Tab Break",
+   "label": "Service Details"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2026-02-11 13:24:17.183511",
+ "modified_by": "Administrator",
+ "module": "Forms Pro",
+ "name": "Job Card Entry",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
