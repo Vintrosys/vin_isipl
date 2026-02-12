@@ -468,7 +468,8 @@
    "fetch_from": null,
    "fetch_if_empty": 0,
    "fieldname": "custom_machine_problem",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
+   
    "hidden": 0,
    "hide_border": 0,
    "hide_days": 0,
