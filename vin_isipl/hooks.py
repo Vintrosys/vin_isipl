@@ -333,3 +333,28 @@ override_doctype_class = {
 
 
 
+fixtures = [
+    {
+        "doctype": "Custom Field",
+        "filters": [
+            ["dt", "in", ["HD Ticket"]]
+        ]
+    },
+    {
+        "doctype": "Server Script",
+        "filters": [
+            ["reference_doctype", "=", "HD Ticket"]
+        ]
+    }
+]
+
+# patches = [
+#     "vin_isipl.patches.fix_old_ticket_datetime"
+# ]
+doc_events = {
+    "HD Ticket": {
+        "before_insert": "vin_isipl.override_hd_ticket.before_insert",
+        "before_save": "vin_isipl.override_hd_ticket.before_save",
+    }
+}
+
