@@ -13,8 +13,8 @@ def execute():
             "HD Ticket",
             t.name,
             {
-                "created_on_date": t.creation.date(),
-                "created_on_time": t.creation.time().replace(microsecond=0),
+                "custom_created_on_date": t.creation.date(),
+                "custom_created_on_time": t.creation.time().replace(microsecond=0),
                 "custom_last_modified_date": t.modified.date(),
                 "custom_last_modified_time": t.modified.time().replace(microsecond=0),
             },
