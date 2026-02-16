@@ -1,0 +1,32 @@
+{
+ "custom_fields": [],
+ "custom_perms": [],
+ "doctype": "Machine type list",
+ "links": [],
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2026-02-16 18:02:24.690372",
+   "default_value": null,
+   "doc_type": "Machine type list",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "machine_quantity",
+   "idx": 0,
+   "is_system_generated": 0,
+   "modified": "2026-02-16 18:02:24.690372",
+   "modified_by": "Administrator",
+   "module": null,
+   "name": "Machine type list-machine_quantity-label",
+   "owner": "Administrator",
+   "property": "label",
+   "property_type": "Data",
+   "row_name": null,
+   "value": "Machine Quantity"
+  }
+ ],
+ "sync_on_migrate": 1
+}
