@@ -68,43 +68,130 @@ def get_customer_total_outstanding(customer):
 	return total_oustanding
 
 
-def get_gst_rate_wise_details(sales_invoice_doc):
-	"""
-	Return a dictionary with a key "is_igst" and a list "gst_breakup".
-	"gst_breakup" is a list of dictionaries, each dictionary contains tax rate and its corresponding CGST, SGST, IGST amounts.
+# def get_gst_rate_wise_details(sales_invoice_doc):
+# 	"""
+# 	Return a dictionary with a key "is_igst" and a list "gst_breakup".
+# 	"gst_breakup" is a list of dictionaries, each dictionary contains tax rate and its corresponding CGST, SGST, IGST amounts.
 	
-	Example:
-	{
-		"is_igst": False,
-		"gst_breakup": [
-			{
-				"tax_rate": 18, "taxable_amount": 0, "cgst_rate": 9, "cgst_amount": 0, "sgst_rate": 9, "sgst_amount": 0, "igst_rate": 0, "igst_amount": 0
-			},
-			{
-				"tax_rate": 12, "taxable_amount": 0, "cgst_rate": 6, "cgst_amount": 0, "sgst_rate": 6, "sgst_amount": 0, "igst_rate": 0, "igst_amount": 0
-			}
-		]
-	}
+# 	Example:
+# 	{
+# 		"is_igst": False,
+# 		"gst_breakup": [
+# 			{
+# 				"tax_rate": 18, "taxable_amount": 0, "cgst_rate": 9, "cgst_amount": 0, "sgst_rate": 9, "sgst_amount": 0, "igst_rate": 0, "igst_amount": 0
+# 			},
+# 			{
+# 				"tax_rate": 12, "taxable_amount": 0, "cgst_rate": 6, "cgst_amount": 0, "sgst_rate": 6, "sgst_amount": 0, "igst_rate": 0, "igst_amount": 0
+# 			}
+# 		]
+# 	}
+# 	"""
+
+# 	if not sales_invoice_doc.taxes:
+# 		return {
+# 			"is_igst": False,
+# 			"gst_breakup": []
+# 		}
+	
+# 	tax_accounts = {}
+# 	is_igst = False
+# 	for tax in sales_invoice_doc.taxes:
+# 		if getattr(tax, "category", None) and tax.category == "Valuation":
+# 			continue
+
+# 		if tax.gst_tax_type and tax.gst_tax_type not in tax_accounts:
+# 			tax_accounts[tax.description] = tax.gst_tax_type
+	
+# 	itemised_tax_data = get_itemised_tax_breakup_data(sales_invoice_doc)
+
+# 	tax_rate_wise_details = {}
+# 	for row in itemised_tax_data:
+# 		tax_rate = 0
+# 		tax_detail = {
+# 			"cgst_rate": 0,
+# 			"cgst_amount": 0,
+# 			"sgst_rate": 0,
+# 			"sgst_amount": 0,
+# 			"igst_rate": 0,
+# 			"igst_amount": 0
+# 		}
+
+# 		for tax_desc, tax_type in tax_accounts.items():
+# 			tax_account_detail = row.get(tax_desc)
+
+# 			if tax_account_detail and tax_account_detail.get("tax_rate"):
+# 				tax_rate += tax_account_detail.get("tax_rate")
+# 				tax_detail[f"{tax_type}_rate"] = tax_account_detail.get("tax_rate")
+# 				tax_detail[f"{tax_type}_amount"] = (tax_detail.get(f"{tax_type}_amount") or 0) + tax_account_detail.get("tax_amount")
+		
+# 		if not tax_rate:
+# 			continue
+
+# 		if tax_rate not in tax_rate_wise_details:
+# 			tax_rate_wise_details[tax_rate] = frappe._dict({
+# 				"tax_rate": tax_rate,
+# 				"taxable_amount": row.get("taxable_amount") or 0,
+# 				**tax_detail
+# 			})
+# 		else:
+# 			tax_rate_wise_details[tax_rate].taxable_amount += row.get("taxable_amount") or 0
+			
+# 			for key, value in tax_detail.items():
+# 				if key.endswith("_amount"):
+# 					tax_rate_wise_details[tax_rate][key] = (tax_rate_wise_details[tax_rate].get(key) or 0) + value
+		
+# 		if tax_rate_wise_details[tax_rate]["igst_rate"]:
+# 			is_igst = True
+
+# 	return frappe._dict({
+# 		"is_igst": is_igst,
+# 		"gst_breakup": sorted(list(tax_rate_wise_details.values()), key=lambda x: x.tax_rate)
+# 	})
+def get_gst_rate_wise_details(doc):
+	"""
+	Safe GST breakup for Sales Invoice / Quotation.
+	Will NOT crash if _item_wise_tax_details is missing.
 	"""
 
-	if not sales_invoice_doc.taxes:
-		return {
-			"is_igst": False,
-			"gst_breakup": []
-		}
-	
+	if not doc:
+		return {"is_igst": False, "gst_breakup": []}
+
+	# No taxes → return empty
+	if not getattr(doc, "taxes", None):
+		return {"is_igst": False, "gst_breakup": []}
+
+	# 🔒 Ensure item wise tax details exists
+	if not getattr(doc, "_item_wise_tax_details", None):
+		try:
+			# try generating it
+			doc.set_item_wise_tax_details()
+		except Exception:
+			return {"is_igst": False, "gst_breakup": []}
+
+	# 🔒 If still missing → stop safely
+	if not getattr(doc, "_item_wise_tax_details", None):
+		return {"is_igst": False, "gst_breakup": []}
+
+	try:
+		itemised_tax_data = get_itemised_tax_breakup_data(doc)
+	except Exception:
+		return {"is_igst": False, "gst_breakup": []}
+
+	if not itemised_tax_data:
+		return {"is_igst": False, "gst_breakup": []}
+
 	tax_accounts = {}
 	is_igst = False
-	for tax in sales_invoice_doc.taxes:
-		if getattr(tax, "category", None) and tax.category == "Valuation":
+
+	for tax in doc.taxes:
+		if getattr(tax, "category", None) == "Valuation":
 			continue
 
-		if tax.gst_tax_type and tax.gst_tax_type not in tax_accounts:
+		if getattr(tax, "gst_tax_type", None):
 			tax_accounts[tax.description] = tax.gst_tax_type
-	
-	itemised_tax_data = get_itemised_tax_breakup_data(sales_invoice_doc)
 
 	tax_rate_wise_details = {}
+
 	for row in itemised_tax_data:
 		tax_rate = 0
 		tax_detail = {
@@ -120,10 +207,13 @@ def get_gst_rate_wise_details(sales_invoice_doc):
 			tax_account_detail = row.get(tax_desc)
 
 			if tax_account_detail and tax_account_detail.get("tax_rate"):
-				tax_rate += tax_account_detail.get("tax_rate")
-				tax_detail[f"{tax_type}_rate"] = tax_account_detail.get("tax_rate")
-				tax_detail[f"{tax_type}_amount"] = (tax_detail.get(f"{tax_type}_amount") or 0) + tax_account_detail.get("tax_amount")
-		
+				rate = tax_account_detail.get("tax_rate") or 0
+				amount = tax_account_detail.get("tax_amount") or 0
+
+				tax_rate += rate
+				tax_detail[f"{tax_type}_rate"] = rate
+				tax_detail[f"{tax_type}_amount"] += amount
+
 		if not tax_rate:
 			continue
 
@@ -135,17 +225,20 @@ def get_gst_rate_wise_details(sales_invoice_doc):
 			})
 		else:
 			tax_rate_wise_details[tax_rate].taxable_amount += row.get("taxable_amount") or 0
-			
-			for key, value in tax_detail.items():
+
+			for key in tax_detail:
 				if key.endswith("_amount"):
-					tax_rate_wise_details[tax_rate][key] = (tax_rate_wise_details[tax_rate].get(key) or 0) + value
-		
-		if tax_rate_wise_details[tax_rate]["igst_rate"]:
+					tax_rate_wise_details[tax_rate][key] += tax_detail[key]
+
+		if tax_detail.get("igst_rate"):
 			is_igst = True
 
 	return frappe._dict({
 		"is_igst": is_igst,
-		"gst_breakup": sorted(list(tax_rate_wise_details.values()), key=lambda x: x.tax_rate)
+		"gst_breakup": sorted(
+			list(tax_rate_wise_details.values()),
+			key=lambda x: x.tax_rate
+		)
 	})
 
 
