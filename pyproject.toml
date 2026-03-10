@@ -1,20 +1,21 @@
 [project]
 name = "vin_isipl"
 authors = [
-    { name = "Vintrosys", email = "admin@vintrosys.com"}
+    { name = "Vintrosys", email = "admin@vintrosys.com" }
 ]
 description = "Vin Isipl"
-requires-python = ">=3.10"
 readme = "README.md"
+requires-python = ">=3.10"
 dynamic = ["version"]
-dependencies = [
-    # "frappe~=15.0.0" # Installed and managed by bench.
-]
+dependencies = []
 
 [build-system]
 requires = ["flit_core >=3.4,<4"]
 build-backend = "flit_core.buildapi"
 
-# These dependencies are only installed when developer mode is enabled
+# Required for Bench (Frappe v15 & v16 compatibility)
+[tool.bench.frappe-dependencies]
+frappe = ">=15.0.0,<17.0.0"
+
+# Optional developer mode dependencies
 [tool.bench.dev-dependencies]
-# package_name = "~=1.1.0"
