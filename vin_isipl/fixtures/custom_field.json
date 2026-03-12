@@ -1,0 +1,46 @@
+[
+ {
+  "doctype": "Custom Field",
+  "name": "HD Ticket-custom_created_on_date",
+  "dt": "HD Ticket",
+  "fieldname": "custom_created_on_date",
+  "fieldtype": "Date",
+  "label": "Created On Date",
+  "insert_after": "subject",
+  "read_only": 1,
+  "module": "Vin Isipl"
+ },
+ {
+  "doctype": "Custom Field",
+  "name": "HD Ticket-custom_created_on_time",
+  "dt": "HD Ticket",
+  "fieldname": "custom_created_on_time",
+  "fieldtype": "Time",
+  "label": "Created On Time",
+  "insert_after": "custom_created_on_date",
+  "read_only": 1,
+  "module": "Vin Isipl"
+ },
+ {
+  "doctype": "Custom Field",
+  "name": "HD Ticket-custom_last_modified_date",
+  "dt": "HD Ticket",
+  "fieldname": "custom_last_modified_date",
+  "fieldtype": "Date",
+  "label": "Last Modified Date",
+  "insert_after": "opening_date",
+  "read_only": 1,
+  "module": "Vin Isipl"
+ },
+ {
+  "doctype": "Custom Field",
+  "name": "HD Ticket-custom_last_modified_time",
+  "dt": "HD Ticket",
+  "fieldname": "custom_last_modified_time",
+  "fieldtype": "Time",
+  "label": "Last Modified Time",
+  "insert_after": "custom_last_modified_date",
+  "read_only": 1,
+  "module": "Vin Isipl"
+ }
+]

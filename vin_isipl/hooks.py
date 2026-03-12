@@ -5,6 +5,23 @@ app_description = "Vin Isipl"
 app_email = "admin@vintrosys.com"
 app_license = "mit"
 
+
+doc_events = {
+    "HD Ticket": {
+        "before_insert": "vin_isipl.override_hd_ticket.before_insert",
+        "before_save": "vin_isipl.override_hd_ticket.before_save"
+    }
+}
+
+fixtures = [
+    {
+        "dt": "Custom Field",
+        "filters": [
+            ["module", "=", "Vin Isipl"]
+        ]
+    }
+]
+
 # Apps
 # ------------------
 
